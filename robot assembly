@@ -1,0 +1,4 @@
+the testbed is a robot basing on rasperry pi 3 b+
+ubuntu18.04 LTS was installed
+initiall, try to install kedei spi_128M 60HZ lcs touch screen, leading to system crash, stop installing it
+configure wifi issues for rasperry
