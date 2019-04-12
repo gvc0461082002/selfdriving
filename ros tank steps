@@ -1,0 +1,10 @@
+1. roslaunch clbrobot bringup.launch # initializaiton
+2. roslaunch clbrobot lidar_slam
+3. rosrun rviz rviz ( in your local computer)
+open  a config file named slam.rviz
+4. run teleop_keyboard_twist (ros package)( run it in your local computer)
+
+please note, when the roscore runs on the robot
+the rosmater starts
+To make your local rviz connected to the rosmaster on the robot, please refer to 
+https://www.intorobotics.com/how-to-setup-ros-kinetic-to-communicate-between-raspberry-pi-3-and-a-remote-linux-pc/
