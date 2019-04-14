@@ -1,0 +1,22 @@
+
+
+Feature detection
+
+    In computer vision and image processing the concept of feature detection refers to methods that aim at computing abstractions of image information and making local decisions at every image point whether there is an image feature of a given type at that point or not. The resulting features will be subsets of the image domain, often in the form of isolated points, continuous curves or connected regions.
+
+    Feature detection = how to find some interesting points (features) in the image.(Ex: find a corner, find a template and so on...)
+
+Feature extraction
+
+    In pattern recognition and in image processing, feature extraction is a special form of dimensionality reduction. When the input data to an algorithm is too large to be processed and it is suspected to be notoriously redundant (much data, but not much information) then the input data will be transformed into a reduced representation set of features (also named features vector). Transforming the input data into the set of features is called feature extraction. If the features extracted are carefully chosen it is expected that the features set will extract the relevant information from the input data in order to perform the desired task using this reduced representation instead of the full size input.
+
+    Feature extraction = how to represent the interesting points we found to compare them with other interesting points (features) in the image. (Ex, the local area intensity of this point? The local orientation of the area around the point? and so on...)
+
+Practical example : You can find a corner with the harris corner method, but you can describe it with any method you want (Histograms , HOG, Local Orientation in the 8th adjacency for instance)
+
+You can see here some more informations, Wikipedia link
+
+Julien, (Helped with wikipedia :p)
+
+cited from 
+https://stackoverflow.com/questions/6832933/difference-between-feature-detection-and-descriptor-extraction
