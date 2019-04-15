@@ -1,0 +1,2 @@
+# copy all files recursively
+scp -r user@IP:/path/folder
