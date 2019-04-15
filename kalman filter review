@@ -1,0 +1,6 @@
+the essence of KLF is an state space updating mode, which can be expressed as:
+x(m) = function1(x(m-1))+error_x_(m-1)
+y(m) = function2(x(m))+error_y_(m)
+flavors of KLF are:
+Extended KLF
+Unscented KLF ( average of predictions)
