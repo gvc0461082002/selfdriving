@@ -29,3 +29,10 @@ open slam.rviz
 # auto slam
 roslaunch clbrobot auto_slam.launch
 open auto_slam.rviz
+#reason failed communication between master and other nodes
+besides normal settings introduced in ROS forum
+1. check both firewalls, sudo ufw status verbose
+2. roswtf, to find issues
+3. rosnode info, to find all nodes details, for instance
+4. rosrun rospy_tutorials listener.py,  rosrun rospy_tutorials talker.py, run them on both terminals respectively/exchangably
+5. desable IPV6 in the client terminals
