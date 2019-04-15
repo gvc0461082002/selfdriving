@@ -2,3 +2,9 @@ set master node IP
 rosrun rviz rviz , open omdmetry.rviz  at computer 
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py at robot
 IMU, cd /clbrobot_project/clbrobot/param/imu,   imu_calib.yaml
+rosrun imu_calib do_calib
+
+# angular calibration
+rosrun rikirobot_nav calibrate_angular.py
+rosrun rqt_reconfigure rqt_reconfigure  at computer
+rqt is a Qt-based framework for GUI development for ROS
