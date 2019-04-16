@@ -1,0 +1,3 @@
+roslaunch packagename .launch file, to bring up a set of nodes under a package
+refer to http://wiki.ros.org/ROS/Tutorials/CreatingPackage for details of rospack
+refer to http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29 for how nodes under a package was created
