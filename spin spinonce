@@ -1,0 +1,3 @@
+http://wiki.ros.org/roscpp/Overview/Callbacks%20and%20Spinning
+spin: no return until main shutdown
+spinonce: invoked at a certain rate, then go to execute following lines
