@@ -1,0 +1,5 @@
+
+cited from http://wiki.ros.org/costmap_2d
+
+
+The costmap_2d package provides a configurable structure that maintains information about where the robot should navigate in the form of an occupancy grid. The costmap uses sensor data and information from the static map to store and update information about obstacles in the world through the costmap_2d::Costmap2DROS object. The costmap_2d::Costmap2DROS object provides a purely two dimensional interface to its users, meaning that queries about obstacles can only be made in columns. For example, a table and a shoe in the same position in the XY plane, but with different Z positions would result in the corresponding cell in the costmap_2d::Costmap2DROS object's costmap having an identical cost value. This is designed to help planning in planar spaces.
