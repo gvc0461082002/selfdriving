@@ -1,0 +1,2 @@
+ssh -X username@IP
+sudo mate-control-center
