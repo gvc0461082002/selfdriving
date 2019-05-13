@@ -1,0 +1,604 @@
+ cited from https://atadiat.com/en/e-ros-imu-and-arduino-how-to-send-to-ros/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Monday, May 13 2019
+Sidebar
+Atadiat
+Articles
+Micros
+projects
+ Write with Us
+About us
+العربية
+
+Search for
+ 
+ AD Space
+ Home/Articles/ROS, IMU and an Arduino: How to read IMU sensor output and send it to ROS
+ArticlesRobot
+ROS, IMU and an Arduino: How to read IMU sensor output and send it to ROS
+  Ahmad Said  20th January 2019 0 1,337   3 minutes read
+Contents [hide]
+
+1 What Is IMU MPU6050
+2 Sensor Readings
+3 Nodes and Topics
+3.1 rosserial (publisher node)
+3.2 Subscriber Node
+Navigating a robot can be pretty easy while using human assistance. In certain cases, full control will be needed. As part of a helping hand project, we need to use IMU (inertial measurement unit) sensor. This type of sensor can measure and report robot’s specific force, angular rate, and the magnetic field surrounding the robot in all three directions (X, Y and Z) and for sure for the helping hand.
+
+So, I’ve decided to make this tutorial on how to connect and get values from IMU (specifically MPU6050 IMU) through Arduino board and send it directly to ROS using rosserial. As reading the IMU raw sensors’ data will be a cornerstone part for any project that uses IMU with ROS.
+
+To know more about connecting Arduino with ROS, you can read our introduction to rosserial_arduino.
+ 
+
+What Is IMU MPU6050
+ 
+
+This sensor contains a 3 axis MEMS accelerometer and a 3 axis MEMS gyro in a single chip. Talking about readings resolution, it contains 16-bits analog to digital conversion hardware for each channel.
+
+MPU6050 breakout board
+
+It’s not only a  3 axis gyro, but it also contains a 3 axis accelerometer on a single chip so you do not need to align them together using 2 different chips … remember it’s a measurement unit, right? Not a single sensor. You can find other IMUs from other providers in the market, even with more sensors inside as MPU6050 does not contain a magnetic sensor for instance
+
+MPU6050 features from the datasheet
+
+I2C Digital-output
+Input Voltage: 2.3 – 3.4V.
+Tri-Axis angular rate sensor (gyro) with a sensitivity up to 131 LSBs/dps and a full-scale range of ±250, ±500, ±1000, and ±2000dps.
+Tri-Axis accelerometer with a programmable full-scale range of ±2g, ±4g, ±8g and ±16g
+Digital Motion Processing™ (DMP™) engine offloads complex MotionFusion, sensor timing synchronization and gesture detection.
+Digital-output temperature sensor.
+ 
+
+Sensor Readings
+ 
+
+We will start by connecting the sensor to the Arduino board as shown in the picture.
+
+Note that MPU6050 itself operates with an input voltage 2.3 – 3.4V, but the breakout board contains a voltage regulator.
+
+
+Wrong SCL/SDA direct connection. Check the note below. Image courtesy of Paiku Han
+
+ 
+
+Another important note: Although it isn’t right, many tutorials connects  SCL and SDA directly between Arduino and the module. The MPU6050 uses 3.3V  signal level while some Arduino types use 5V level and if you read Atmega328 datasheet, you will find that Arduino UNO, for example, can listen for 3.3V signals while MPU6050’s indicates that:
+
+
+
+In case of the VDD = 3.3V, this means that ‘1’ as an input should be in the range of (0.7*3.3 = 2.31 V or 3.8V max according to the table below) and ‘0’ as input should be in the range of (0.3*3.3= 0.99 V).
+
+
+
+Some ignore the level consideration; to be on the safe side, you can use any available method of converting levels, like this one (breakout board):
+
+
+
+Image courtesy of Sparkfun. LV should be 3.3V, HV 5V. LV1 is the signal from MPU6050 and HV1 is the signal from 5V Arduino
+
+Now, to collect data from the IMU, we will use a simple code to easily get sensor data and combine them in a single string before sending it to the ROS node.
+
+
+ AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
+  AcY=Wire.read()<<8|Wire.read();  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  AcZ=Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
+  GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  String AX = String(AcX);
+  String AY = String(AcY);
+  String AZ = String(AcZ);
+  String GX = String(GyX);
+  String GY = String(GyY);
+  String GZ = String(GyZ);
+  String tmp = String(Tmp);
+
+  String data = "A" + AX + "B"+ AY + "C" + AZ + "D" + GX + "E" + GY + "F" + GZ + "G" ;
+  Serial.println(data);
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+ AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
+  AcY=Wire.read()<<8|Wire.read();  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  AcZ=Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
+  GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  String AX = String(AcX);
+  String AY = String(AcY);
+  String AZ = String(AcZ);
+  String GX = String(GyX);
+  String GY = String(GyY);
+  String GZ = String(GyZ);
+  String tmp = String(Tmp);
+ 
+  String data = "A" + AX + "B"+ AY + "C" + AZ + "D" + GX + "E" + GY + "F" + GZ + "G" ;
+  Serial.println(data);
+ 
+
+After getting the sensor’s readings, we should now start looking for a suitable message type, I tried to find the easiest way to send this data to ROS, thus I decided to use the string message type in ROS by converting the readings into a string type then concatenating all the readings into a string message as in the picture. You can also find the sensor_msgs messages type in the ROS system, and part of it can hold the IMU’s numeric values of sensors readings.
+
+For example, the message would look like this:
+
+“A55B230C-100D-200E-600F450G”
+
+We can easily extract each value and convert it -in the subscriber node- into integers back again.
+
+Note that, I could have created a custom message and send data through it instead of sending data as a string, but it would make no difference.
+
+ 
+
+Nodes and Topics
+ 
+
+A node, according to formal ROS documentation, “Is a process that performs computations. Nodes are combined together into a graph and communicate with one another using streaming topics … a robot control system will usually comprise many nodes.” A node can be a publisher (exports data) or a subscriber (imports data). In this case, the Arduino board acts as a publisher node. It publishes sensor readings as a string.
+
+ 
+
+
+Image courcey of ROS Wiki
+
+ 
+
+rosserial (publisher node)
+ 
+
+The first part of the code is defining a message with String type and defining a publisher node “imu”.
+
+
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <Wire.h>
+
+const int MPU_addr=0x68;  // I2C address of the MPU-6050
+int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
+
+
+//Set up the ros node and publisher
+std_msgs::String imu_msg;
+ros::Publisher imu("imu", &imu_msg);
+ros::NodeHandle nh;
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <Wire.h>
+ 
+const int MPU_addr=0x68;  // I2C address of the MPU-6050
+int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
+ 
+ 
+//Set up the ros node and publisher
+std_msgs::String imu_msg;
+ros::Publisher imu("imu", &imu_msg);
+ros::NodeHandle nh;
+In the setup function, we initialize the node
+
+
+nh.initNode();
+nh.advertise(imu);
+1
+2
+nh.initNode();
+nh.advertise(imu);
+Finally, we publish our message every 100 milliseconds
+
+
+if (millis() > publisher_timer) {
+    // step 1: request reading from sensor
+    imu_msg.data = data_final;
+    imu.publish(&imu_msg);
+    publisher_timer = millis() + 100; //publish ten times a second
+    nh.spinOnce();
+  }
+1
+2
+3
+4
+5
+6
+7
+if (millis() > publisher_timer) {
+    // step 1: request reading from sensor
+    imu_msg.data = data_final;
+    imu.publish(&imu_msg);
+    publisher_timer = millis() + 100; //publish ten times a second
+    nh.spinOnce();
+  }
+takes this data and processes it and could take some action based on the results. Full code bellow:
+
+
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <Wire.h>
+
+const int MPU_addr=0x68;  // I2C address of the MPU-6050
+int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
+
+
+//Set up the ros node and publisher
+std_msgs::String imu_msg;
+ros::Publisher imu("imu", &imu_msg);
+ros::NodeHandle nh;
+
+
+                           
+void setup()
+{
+
+  nh.initNode();
+  nh.advertise(imu);
+  
+  Wire.begin();
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x6B);  // PWR_MGMT_1 register
+  Wire.write(0);     // set to zero (wakes up the MPU-6050)
+  Wire.endTransmission(true);
+  Serial.begin(9600);
+}
+
+long publisher_timer;
+
+void loop()
+{
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
+  Wire.endTransmission(false);
+  Wire.requestFrom(MPU_addr,14,true);  // request a total of 14 registers  String AX = String(mpu6050.getAccX());
+  
+  AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
+  AcY=Wire.read()<<8|Wire.read();  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  AcZ=Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
+  GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  String AX = String(AcX);
+  String AY = String(AcY);
+  String AZ = String(AcZ);
+  String GX = String(GyX);
+  String GY = String(GyY);
+  String GZ = String(GyZ);
+  String tmp = String(Tmp);
+
+  String data = "A" + AX + "B"+ AY + "C" + AZ + "D" + GX + "E" + GY + "F" + GZ + "G" ;
+  Serial.println(data);
+  int length = data.indexOf("G") +2;
+  char data_final[length+1];
+  data.toCharArray(data_final, length+1);
+  
+  if (millis() > publisher_timer) {
+    // step 1: request reading from sensor
+    imu_msg.data = data_final;
+    imu.publish(&imu_msg);
+    publisher_timer = millis() + 100; //publish ten times a second
+    nh.spinOnce();
+  }
+
+  
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+#include <ros.h>
+#include <std_msgs/String.h>
+#include <Wire.h>
+ 
+const int MPU_addr=0x68;  // I2C address of the MPU-6050
+int16_t AcX,AcY,AcZ,Tmp,GyX,GyY,GyZ;
+ 
+ 
+//Set up the ros node and publisher
+std_msgs::String imu_msg;
+ros::Publisher imu("imu", &imu_msg);
+ros::NodeHandle nh;
+ 
+ 
+                           
+void setup()
+{
+ 
+  nh.initNode();
+  nh.advertise(imu);
+  
+  Wire.begin();
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x6B);  // PWR_MGMT_1 register
+  Wire.write(0);     // set to zero (wakes up the MPU-6050)
+  Wire.endTransmission(true);
+  Serial.begin(9600);
+}
+ 
+long publisher_timer;
+ 
+void loop()
+{
+  Wire.beginTransmission(MPU_addr);
+  Wire.write(0x3B);  // starting with register 0x3B (ACCEL_XOUT_H)
+  Wire.endTransmission(false);
+  Wire.requestFrom(MPU_addr,14,true);  // request a total of 14 registers  String AX = String(mpu6050.getAccX());
+  
+  AcX=Wire.read()<<8|Wire.read();  // 0x3B (ACCEL_XOUT_H) & 0x3C (ACCEL_XOUT_L)    
+  AcY=Wire.read()<<8|Wire.read();  // 0x3D (ACCEL_YOUT_H) & 0x3E (ACCEL_YOUT_L)
+  AcZ=Wire.read()<<8|Wire.read();  // 0x3F (ACCEL_ZOUT_H) & 0x40 (ACCEL_ZOUT_L)
+  Tmp=Wire.read()<<8|Wire.read();  // 0x41 (TEMP_OUT_H) & 0x42 (TEMP_OUT_L)
+  GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
+  GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
+  GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
+  String AX = String(AcX);
+  String AY = String(AcY);
+  String AZ = String(AcZ);
+  String GX = String(GyX);
+  String GY = String(GyY);
+  String GZ = String(GyZ);
+  String tmp = String(Tmp);
+ 
+  String data = "A" + AX + "B"+ AY + "C" + AZ + "D" + GX + "E" + GY + "F" + GZ + "G" ;
+  Serial.println(data);
+  int length = data.indexOf("G") +2;
+  char data_final[length+1];
+  data.toCharArray(data_final, length+1);
+  
+  if (millis() > publisher_timer) {
+    // step 1: request reading from sensor
+    imu_msg.data = data_final;
+    imu.publish(&imu_msg);
+    publisher_timer = millis() + 100; //publish ten times a second
+    nh.spinOnce();
+  }
+ 
+  
+}
+ 
+
+Subscriber Node
+ 
+
+Before creating the subscriber node, we should create a workspace and setup the project. You can learn these steps from the official tutorials here. I will assume that you have created your project.
+
+We will create a subscriber node using python, as in this tutorial. If we only change the topic name from “chatter” to “imu”, the data will be received correctly.
+
+
+def listener():
+
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # name are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+    rospy.init_node('listener', anonymous=True)
+
+    rospy.Subscriber("chatter", String, callback)
+
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+def listener():
+ 
+    # In ROS, nodes are uniquely named. If two nodes with the same
+    # name are launched, the previous one is kicked off. The
+    # anonymous=True flag means that rospy will choose a unique
+    # name for our 'listener' node so that multiple listeners can
+    # run simultaneously.
+    rospy.init_node('listener', anonymous=True)
+ 
+    rospy.Subscriber("chatter", String, callback)
+ 
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+ 
+
+Let’s say the Python node received the data “A16868B-932C-2616D5E174F29G” and stored in “imu.data” variable, then we want to have these numbers (16868, -932,-2616,5,174,29) stored into variables as integers. We know from the Arduino code, that the number between A and B is the acceleration in X direction we will call it AX etc..
+
+In this case, we should write: AX = int(imu.data[imu.data.index(“A”)+1:imu.data.index(“B”)])
+
+.i.e imu.data.index(“B”) returns the position of the letter B in the whole string. We will do this for each one of the six readings.
+
+
+
+In this screenshot,AX was printed as a test. You can see the data is received in the terminal and AX is printed in the embedded terminal below.
+
+ 
+
+To launch the ROS system, we use the command:
+
+
+roscore
+1
+roscore
+Then, we start the Arduino node while the Arduino board is connected by USB using the command:
+
+
+rosrun rosserial_python serial_node.py /dev/ttyACM0
+1
+rosrun rosserial_python serial_node.py /dev/ttyACM0
+The Arduino publisher node is now working properly if there are no errors encountered.
+
+We can use the following command to see what the node is publishing:
+
+
+rostopic echo /imu
+1
+rostopic echo /imu
+To start the subscriber node, we use the command:
+
+
+rosrun mini_project subscriber.py    -- mini_project is my project name it can differ with your project
+1
+rosrun mini_project subscriber.py    -- mini_project is my project name it can differ with your project
+The output should be similar in the video attached
+
+
+
+ 
+
+Finally, I know that connecting the sensor to Arduino and reading raw values is the easy part, the rest is not as such simple. This includes understanding the specifications and the operating features of MPU6050. This part has only covered the easy part, and in the next one, we can explore more advanced usage for IMU with ROS.
+
+ AD Space
+ Share FacebookTwitterGoogle+LinkedInPinterestRedditShare via EmailPrint
+ 
+Ahmad Said
+Communication and control engineering student in faculty of engineering, Alexandria university. Ahmed is intreseted in robotics, ROS, embedded systems and Arduino.
+Atadiat Community Newsletter
+Enter your Email address
+Enter your Email address
+Leave a Reply
+Your email address will not be published. Required fields are marked *
+
+
+
+Name * 
+
+Email * 
+Website 
+  Notify me of follow-up comments by email.
+
+ Notify me of new posts by email.
+
+This site uses Akismet to reduce spam. Learn how your comment data is processed.
+
+Check Also
+Close
+struct vs union
+Embedded C: Struct and Union (Part 2)
+ 30th April 2018
+
+A Guide to Switch from Eagle CAD V 7.x to V 8.x
+ 8th August 2017
+
+All About ESP32 – Part 1
+ 25th June 2018
+Follow Us
+Advertisement
+
+Advertise Here!
+
+About
+
+With passionate staff, Atadiat believe that Electronics is a practical domain and related content must be fine and practical. We aim to provide a new content experience with marketing related to electronics to our audience.
+Categories
+Micros23
+Articles17
+projects5
+Pages
+About us
+contact us
+Home Page
+Privacy Policy
+Write with Us
+Newsletter
+Atadiat Community Newsletter
+Subscribe to our mailing list to get the new updates!
+Enter your Email address
+Enter your Email address
+© Copyright 2019, All Rights Reserved
