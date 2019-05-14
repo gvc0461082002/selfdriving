@@ -1,0 +1,12 @@
+
+
+Yes, really. The /etc/hosts file is just a map that links IPs to hostnames. If you want to be able to do things like ssh myname and have that run ssh localhost, you need to add a line that identifies localhost (127.0.0.1) as myname:
+
+127.0.0.1 localhost
+127.0.0.1 myname
+
+You could just replace localhost with myname, but then things like ssh localhost would fail and localhost is pretty standard. So just add another line as shown above.
+
+THEN:
+sudo ifconfig eth0 down
+sudo ifconfig eth0 up
