@@ -1,0 +1,11 @@
+skyhawk is right, set the ROS_IP for each computer. So for each computer, find the IP address in a terminal with
+
+hostname -I
+
+It will be the first set of numbers, like 10.0.0.25. To set it,
+
+export ROS_IP=10.0.0.25
+
+Make sure you're exporting the right address on each one, it'll be different for each computer.
+
+cited from    https://answers.ros.org/question/163556/how-to-solve-couldnt-find-an-af_inet-address-for-problem/
