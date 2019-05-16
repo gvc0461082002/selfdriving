@@ -1,1 +1,452 @@
 
+run  rosnode list
+/apply_calib
+/arduino_serial_node
+/base_footprint_to_base_link
+/base_footprint_to_imu_link
+/base_link_to_laser
+/ekf_localization
+/imu_filter_madgwick
+/move_base
+/riki_base_node
+/rosout
+/rplidarNode
+/rviz_1557987882529732584
+/slam_gmapping
+
+
+run rosnode info /rosout
+--------------------------------------------------------------------------------
+Node [/rosout]
+Publications: 
+ * /rosout_agg [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /rosout [rosgraph_msgs/Log]
+
+Services: 
+ * /rosout/get_loggers
+ * /rosout/set_logger_level
+
+
+contacting node http://thisiscreatemax:35687/ ...
+Pid: 16719
+Connections:
+ * topic: /rosout
+    * to: /apply_calib (http://192.168.1.160 :46403/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /base_footprint_to_imu_link (http://192.168.1.160 :46163/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /base_footprint_to_base_link (http://192.168.1.160 :40007/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /imu_filter_madgwick (http://192.168.1.160 :42467/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /riki_base_node (http://192.168.1.160 :34989/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /ekf_localization (http://192.168.1.160 :46825/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /arduino_serial_node (http://192.168.1.160 :45133/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /rplidarNode (http://192.168.1.160 :45119/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /base_link_to_laser (http://192.168.1.160 :46331/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /slam_gmapping (http://192.168.1.160 :42551/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /move_base (http://192.168.1.160 :36091/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /rviz_1557987882529732584 (http://thisiscreatemax:35359/)
+    * direction: inbound
+    * transport: TCPROS
+
+
+
+run rostopic info /rosout
+Type: rosgraph_msgs/Log
+
+Publishers: 
+ * /apply_calib (http://192.168.1.160 :46403/)
+ * /base_footprint_to_imu_link (http://192.168.1.160 :46163/)
+ * /imu_filter_madgwick (http://192.168.1.160 :42467/)
+ * /riki_base_node (http://192.168.1.160 :34989/)
+ * /base_footprint_to_base_link (http://192.168.1.160 :40007/)
+ * /ekf_localization (http://192.168.1.160 :46825/)
+ * /arduino_serial_node (http://192.168.1.160 :45133/)
+ * /rplidarNode (http://192.168.1.160 :45119/)
+ * /base_link_to_laser (http://192.168.1.160 :46331/)
+ * /slam_gmapping (http://192.168.1.160 :42551/)
+ * /move_base (http://192.168.1.160 :36091/)
+ * /rviz_1557987882529732584 (http://thisiscreatemax:35359/)
+
+Subscribers: 
+ * /rosout (http://thisiscreatemax:35687/)
+
+
+run rostopic echo /rosout
+
+header: 
+  seq: 2
+  stamp: 
+    secs: 1557987922
+    nsecs: 278232863
+  frame_id: ''
+level: 2
+name: "/rviz_1557987882529732584"
+msg: "Creating 1 swatches"
+file: "/tmp/binarydeb/ros-melodic-rviz-1.13.3/src/rviz/default_plugin/map_display.cpp"
+function: "MapDisplay::createSwatches"
+line: 599
+topics: []
+---
+header: 
+  seq: 1
+  stamp: 
+    secs: 1557987767
+    nsecs: 143488692
+  frame_id: ''
+level: 2
+name: "/apply_calib"
+msg: "Gyro calibration complete! (bias = [-0.057, -0.141, -0.013])"
+file: "/home/rikirobot/catkin_ws/src/clbrobot_project/imu_calib/src/apply_calib.cpp"
+function: "ApplyCalib::rawImuCallback"
+line: 90
+topics: [/rosout, /imu/data_raw, /imu/mag]
+---
+header: 
+  seq: 5
+  stamp: 
+    secs: 1557987767
+    nsecs: 197690105
+  frame_id: ''
+level: 2
+name: "/imu_filter_madgwick"
+msg: "First pair of IMU and magnetometer messages received."
+file: "/home/rikirobot/catkin_ws/src/imu_filter_madgwick/src/imu_filter_ros.cpp"
+function: "imuMagCallback"
+line: 259
+topics: [/rosout, /tf, /imu_filter_madgwick/parameter_descriptions, /imu_filter_madgwick/parameter_updates,
+  /imu/data]
+---
+header: 
+  seq: 713
+  stamp: 
+    secs: 1557988505
+    nsecs: 707917763
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.026662784000000001872 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1494
+  stamp: 
+    secs: 1557988506
+    nsecs: 258142948
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1
+  stamp: 
+    secs: 1557987853
+    nsecs: 925218114
+  frame_id: ''
+level: 2
+name: "/slam_gmapping"
+msg: "Initialization complete"
+file: "/tmp/binarydeb/ros-kinetic-gmapping-1.3.10/src/slam_gmapping.cpp"
+function: "initMapper"
+line: 532
+topics: [/rosout, /tf, /slam_gmapping/entropy, /map, /map_metadata]
+---
+header: 
+  seq: 14
+  stamp: 
+    secs: 1557987858
+    nsecs: 118716511
+  frame_id: ''
+level: 2
+name: "/move_base"
+msg: "odom received!"
+file: "/tmp/binarydeb/ros-kinetic-base-local-planner-1.14.4/src/odometry_helper_ros.cpp"
+function: "OdometryHelperRos::odomCallback"
+line: 46
+topics: [/rosout, /cmd_vel, /move_base/current_goal, /move_base/goal, /move_base/global_costmap/static_layer/parameter_descriptions,
+  /move_base/global_costmap/static_layer/parameter_updates, /move_base/global_costmap/obstacle_layer/parameter_descriptions,
+  /move_base/global_costmap/obstacle_layer/parameter_updates, /move_base/global_costmap/inflation_layer/parameter_descriptions,
+  /move_base/global_costmap/inflation_layer/parameter_updates, /move_base/global_costmap/footprint,
+  /move_base/global_costmap/costmap, /move_base/global_costmap/costmap_updates, /move_base/global_costmap/parameter_descriptions,
+  /move_base/global_costmap/parameter_updates, /move_base/GlobalPlanner/plan, /move_base/GlobalPlanner/potential,
+  /move_base/GlobalPlanner/parameter_descriptions, /move_base/GlobalPlanner/parameter_updates,
+  /move_base/local_costmap/obstacle_layer/parameter_descriptions, /move_base/local_costmap/obstacle_layer/parameter_updates,
+  /move_base/local_costmap/inflation_layer/parameter_descriptions, /move_base/local_costmap/inflation_layer/parameter_updates,
+  /move_base/local_costmap/footprint, /move_base/local_costmap/costmap, /move_base/local_costmap/costmap_updates,
+  /move_base/local_costmap/parameter_descriptions, /move_base/local_costmap/parameter_updates,
+  /move_base/DWAPlannerROS/global_plan, /move_base/DWAPlannerROS/local_plan, /move_base/DWAPlannerROS/cost_cloud,
+  /move_base/DWAPlannerROS/trajectory_cloud, /move_base/DWAPlannerROS/parameter_descriptions,
+  /move_base/DWAPlannerROS/parameter_updates, /move_base/result, /move_base/feedback,
+  /move_base/status, /move_base/parameter_descriptions, /move_base/parameter_updates]
+---
+header: 
+  seq: 714
+  stamp: 
+    secs: 1557988506
+    nsecs: 749834868
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.023296745000000000647 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1495
+  stamp: 
+    secs: 1557988507
+    nsecs: 258249044
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Left: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1496
+  stamp: 
+    secs: 1557988507
+    nsecs: 262398958
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 715
+  stamp: 
+    secs: 1557988507
+    nsecs: 847246654
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.022727361000000001479 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1497
+  stamp: 
+    secs: 1557988508
+    nsecs: 259556055
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Left: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1498
+  stamp: 
+    secs: 1557988508
+    nsecs: 263675928
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 716
+  stamp: 
+    secs: 1557988508
+    nsecs: 865968507
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.023485177000000002911 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1499
+  stamp: 
+    secs: 1557988509
+    nsecs: 263035058
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Left: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1500
+  stamp: 
+    secs: 1557988509
+    nsecs: 267374992
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 717
+  stamp: 
+    secs: 1557988509
+    nsecs: 881484339
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.020905463000000002599 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1501
+  stamp: 
+    secs: 1557988510
+    nsecs: 274765968
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Left: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1502
+  stamp: 
+    secs: 1557988510
+    nsecs: 278390884
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 718
+  stamp: 
+    secs: 1557988510
+    nsecs: 933664114
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.02273206900000000058 seconds. Try decreasing the\
+  \ rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
+header: 
+  seq: 1503
+  stamp: 
+    secs: 1557988511
+    nsecs: 276781082
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Left: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 1504
+  stamp: 
+    secs: 1557988511
+    nsecs: 279910087
+  frame_id: ''
+level: 2
+name: "/arduino_serial_node"
+msg: "Encoder Right: 0"
+file: "SerialClient.py"
+function: "handleLoggingRequest"
+line: 687
+topics: [/cmd_vel, /diagnostics, /raw_imu, /battery, /rosout, /pid, /raw_vel]
+---
+header: 
+  seq: 719
+  stamp: 
+    secs: 1557988511
+    nsecs: 985823848
+  frame_id: ''
+level: 4
+name: "/ekf_localization"
+msg: "Failed to meet update rate! Took 0.022228631000000002166 seconds. Try decreasing\
+  \ the rate, limiting sensor output frequency, or limiting the number of sensors."
+file: "/home/rikirobot/catkin_ws/src/robot_localization/src/ros_filter.cpp"
+function: "RosFilter<T>::run"
+line: 1941
+topics: [/rosout, /diagnostics, /odom, /tf]
+---
