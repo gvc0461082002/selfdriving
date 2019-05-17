@@ -11,3 +11,24 @@ Sensor data
  
  The clients receive data over topics (usually some commands, such as cmd_vel) to perform actions
  
+Therefore, it means the functionalities, such as perceptions, localications, path planners and others, can be extracted independently from any popular self-driving projects, Apolloauto, Autoware, PX4, Webbots...
+
+That's the advantage of modularization.
+
+Therefore , a general concept can be summarized as the following:
+step 1: coding or git packages for related sensors, including IMU,Lidar,Camera
+        every sensor will publish msgs over a certain topic ( the topic can be remapped or redefined )
+        
+step 2: coding or git related packages of related functionalities. For instances, Perception, Path Planning,etc..
+        every package may subscrible some topics with msg formats
+        Firstly, list topics including msgs of every functionality
+        Secondly, comapre topics(msgs) supplied/published by sensors with the requirements by every functionality
+        Thirdly,  matching topics(msgs) or revise them on purpose
+
+step 3: Once all topics(msgs) matching are completed, the test can be initialized , verifying all functionalities
+        (Sure, offline-simulation can be deployed to test functionalities as well, bags should be played to mimic
+         sensors' output. And the topics/msgs should be matched as well)
+         
+step 4:  The finaly stage will be packing all source codes up, finalized the complete test.
+
+
