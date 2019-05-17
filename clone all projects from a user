@@ -1,0 +1,7 @@
+Today, I want to download all repos from a user,
+have a quick google, and find/verify the single command line from
+https://gist.github.com/milanboers/f34cdfc3e1ad9ba02ee8e44dae8e093f , Thanks milanboer
+
+curl -s "https://api.github.com/users/milanboers/repos?per_page=100" | jq -r ".[].git_url" | xargs -L1 git clone
+
+Here, change milanboers to the user to be cloned
