@@ -1,0 +1,13 @@
+Since ROS Master and Clients can be installed into different computers,
+Sensor data
+     1. LIdar
+     2. IMU
+     3. Camera
+ can be acquired by a mobile platform,
+ the acquired data will be packed in the formate of certain msgs respectivelly, published over some topics
+ 
+ The Computation-Intensive computer (usually Master) can subscrible such topics, analyzing the data carried by msgs, sending 
+ feedbacks to client-ends.
+ 
+ The clients receive data over topics (usually some commands, such as cmd_vel) to perform actions
+ 
