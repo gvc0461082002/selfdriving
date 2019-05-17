@@ -8,3 +8,325 @@ run rosnode list # list all active nodes
 /imu_filter_madgwick
 /riki_base_node
 /rosout
+
+rosnode info /apply_calib 
+--------------------------------------------------------------------------------
+Node [/apply_calib]
+Publications: 
+ * /imu/data_raw [sensor_msgs/Imu]
+ * /imu/mag [sensor_msgs/MagneticField]
+ * /rosout [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /raw_imu [riki_msgs/Imu]
+
+Services: 
+ * /apply_calib/get_loggers
+ * /apply_calib/set_logger_level
+
+
+contacting node http://192.168.1.121:44649/ ...
+Pid: 1991
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /imu/data_raw
+    * to: /imu_filter_madgwick
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /imu/mag
+    * to: /imu_filter_madgwick
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /raw_imu
+    * to: /arduino_serial_node (http://192.168.1.121:41313/)
+    * direction: inbound
+    * transport: TCPROS
+    
+    
+rosnode info /arduino_serial_node 
+--------------------------------------------------------------------------------
+Node [/arduino_serial_node]
+Publications: 
+ * /battery [riki_msgs/Battery]
+ * /diagnostics [diagnostic_msgs/DiagnosticArray]
+ * /raw_imu [riki_msgs/Imu]
+ * /raw_vel [riki_msgs/Velocities]
+ * /rosout [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /cmd_vel [unknown type]
+ * /pid [unknown type]
+
+Services: 
+ * /arduino_serial_node/get_loggers
+ * /arduino_serial_node/set_logger_level
+
+
+contacting node http://192.168.1.121:41313/ ...
+Pid: 1990
+Connections:
+ * topic: /raw_imu
+    * to: /apply_calib
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /raw_vel
+    * to: /riki_base_node
+    * direction: outbound
+    * transport: TCPROS
+
+rosnode info /base_footprint_to_base_link 
+--------------------------------------------------------------------------------
+Node [/base_footprint_to_base_link]
+Publications: 
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: None
+
+Services: 
+ * /base_footprint_to_base_link/get_loggers
+ * /base_footprint_to_base_link/set_logger_level
+
+
+contacting node http://192.168.1.121:36013/ ...
+Pid: 1995
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+
+
+rosnode info /base_footprint_to_imu_link 
+--------------------------------------------------------------------------------
+Node [/base_footprint_to_imu_link]
+Publications: 
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: None
+
+Services: 
+ * /base_footprint_to_imu_link/get_loggers
+ * /base_footprint_to_imu_link/set_logger_level
+
+
+contacting node http://192.168.1.121:44037/ ...
+Pid: 1993
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+    
+  rosnode info /ekf_localization 
+--------------------------------------------------------------------------------
+Node [/ekf_localization]
+Publications: 
+ * /diagnostics [diagnostic_msgs/DiagnosticArray]
+ * /odom [nav_msgs/Odometry]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: 
+ * /imu/data [sensor_msgs/Imu]
+ * /raw_odom [nav_msgs/Odometry]
+ * /set_pose [unknown type]
+ * /tf [tf2_msgs/TFMessage]
+ * /tf_static [unknown type]
+
+Services: 
+ * /ekf_localization/enable
+ * /ekf_localization/get_loggers
+ * /ekf_localization/set_logger_level
+ * /set_pose
+
+
+contacting node http://192.168.1.121:44807/ ...
+Pid: 1996
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: INTRAPROCESS
+ * topic: /tf
+    * to: /base_footprint_to_base_link (http://192.168.1.121:36013/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /riki_base_node (http://192.168.1.121:45619/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /base_footprint_to_imu_link (http://192.168.1.121:44037/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /imu_filter_madgwick (http://192.168.1.121:42415/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization (http://192.168.1.121:44807/)
+    * direction: inbound
+    * transport: INTRAPROCESS
+ * topic: /raw_odom
+    * to: /riki_base_node (http://192.168.1.121:45619/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /imu/data
+    * to: /imu_filter_madgwick (http://192.168.1.121:42415/)
+    * direction: inbound
+    * transport: TCPROS
+
+
+rosnode info /imu_filter_madgwick 
+--------------------------------------------------------------------------------
+Node [/imu_filter_madgwick]
+Publications: 
+ * /imu/data [sensor_msgs/Imu]
+ * /imu_filter_madgwick/parameter_descriptions [dynamic_reconfigure/ConfigDescription]
+ * /imu_filter_madgwick/parameter_updates [dynamic_reconfigure/Config]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: 
+ * /imu/data_raw [sensor_msgs/Imu]
+ * /imu/mag [sensor_msgs/MagneticField]
+
+Services: 
+ * /imu_filter_madgwick/get_loggers
+ * /imu_filter_madgwick/set_logger_level
+ * /imu_filter_madgwick/set_parameters
+
+
+contacting node http://192.168.1.121:42415/ ...
+Pid: 1992
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /imu/data
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /imu/data_raw
+    * to: /apply_calib (http://192.168.1.121:44649/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /imu/mag
+    * to: /apply_calib (http://192.168.1.121:44649/)
+    * direction: inbound
+    * transport: TCPROS
+
+
+rosnode info /riki_base_node 
+--------------------------------------------------------------------------------
+Node [/riki_base_node]
+Publications: 
+ * /raw_odom [nav_msgs/Odometry]
+ * /rosout [rosgraph_msgs/Log]
+ * /tf [tf2_msgs/TFMessage]
+
+Subscriptions: 
+ * /raw_vel [riki_msgs/Velocities]
+
+Services: 
+ * /riki_base_node/get_loggers
+ * /riki_base_node/set_logger_level
+
+
+contacting node http://192.168.1.121:45619/ ...
+Pid: 1994
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /tf
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /raw_odom
+    * to: /ekf_localization
+    * direction: outbound
+    * transport: TCPROS
+ * topic: /raw_vel
+    * to: /arduino_serial_node (http://192.168.1.121:41313/)
+    * direction: inbound
+    * transport: TCPROS
+
+
+rosnode info /rosout 
+--------------------------------------------------------------------------------
+Node [/rosout]
+Publications: 
+ * /rosout_agg [rosgraph_msgs/Log]
+
+Subscriptions: 
+ * /rosout [rosgraph_msgs/Log]
+
+Services: 
+ * /rosout/get_loggers
+ * /rosout/set_logger_level
+
+
+contacting node http://192.168.1.85:46255/ ...
+Pid: 6883
+Connections:
+ * topic: /rosout
+    * to: /base_footprint_to_base_link (http://192.168.1.121:36013/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /apply_calib (http://192.168.1.121:44649/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /imu_filter_madgwick (http://192.168.1.121:42415/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /riki_base_node (http://192.168.1.121:45619/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /base_footprint_to_imu_link (http://192.168.1.121:44037/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /ekf_localization (http://192.168.1.121:44807/)
+    * direction: inbound
+    * transport: TCPROS
+ * topic: /rosout
+    * to: /arduino_serial_node (http://192.168.1.121:41313/)
+    * direction: inbound
+    * transport: TCPROS
+
+
+
+
+
