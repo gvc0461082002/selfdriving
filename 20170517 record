@@ -1,0 +1,10 @@
+run rosnode list # list all active nodes
+
+/apply_calib
+/arduino_serial_node
+/base_footprint_to_base_link
+/base_footprint_to_imu_link
+/ekf_localization
+/imu_filter_madgwick
+/riki_base_node
+/rosout
