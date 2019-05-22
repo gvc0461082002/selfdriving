@@ -1,0 +1,152 @@
+COMMAND     PID     USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+systemd       1     root  244u  IPv6     537      0t0  TCP *:6600 (LISTEN)
+skypeforl   475     1000  102u  IPv4 9850687      0t0  TCP 192.168.31.190:36764->52.114.158.92:https (ESTABLISHED)
+skypeforl   475     1000  104u  IPv4 9867080      0t0  TCP 192.168.31.190:50496->52.175.17.224:https (ESTABLISHED)
+skypeforl   475     1000  110u  IPv4 9867081      0t0  TCP 192.168.31.190:50498->52.175.17.224:https (ESTABLISHED)
+skypeforl   475     1000  114u  IPv4 9877734      0t0  TCP 192.168.31.190:46474->192.229.232.200:https (ESTABLISHED)
+skypeforl   475     1000  115u  IPv4 9532375      0t0  TCP 192.168.31.190:48102->52.229.174.94:https (ESTABLISHED)
+skypeforl   475     1000  116u  IPv4 9849699      0t0  TCP 192.168.31.190:48542->52.229.174.94:https (ESTABLISHED)
+skypeforl   475     1000  117u  IPv4 9871178      0t0  TCP 192.168.31.190:46476->192.229.232.200:https (ESTABLISHED)
+skypeforl   552     1000   42u  IPv6 9839291      0t0  TCP 192.168.31.190:35747->52.114.32.8:https (ESTABLISHED)
+skypeforl   552     1000   53u  IPv6 9847078      0t0  TCP 192.168.31.190:49091->13.75.106.0:https (ESTABLISHED)
+skypeforl   552     1000  136u  IPv6 8982280      0t0  UDP *:44686 
+mainboard   808     root    8u  IPv4 9465794      0t0  UDP *:26000 
+mainboard   808     root    9u  IPv4 9465804      0t0  UDP *:26010 
+mainboard   808     root   10u  IPv4 9465805      0t0  UDP *:26011 
+mainboard   808     root   11u  IPv4 9465806      0t0  UDP localhost:52523 
+mainboard   808     root   15u  IPv4 9465807      0t0  UDP *:37084 
+mainboard   808     root   16u  IPv4 9465808      0t0  UDP *:8888 
+dreamview   883     root   12u  IPv4 9475563      0t0  TCP *:8888 (LISTEN)
+dreamview   883     root   67u  IPv4 9473657      0t0  UDP *:26000 
+dreamview   883     root   68u  IPv4 9473668      0t0  UDP *:26012 
+dreamview   883     root   69u  IPv4 9473670      0t0  UDP *:26013 
+dreamview   883     root   70u  IPv4 9473671      0t0  UDP localhost:49962 
+dreamview   883     root   74u  IPv4 9473672      0t0  UDP *:33044 
+dreamview   883     root   75u  IPv4 9473673      0t0  UDP *:8888 
+dreamview   883     root   80u  IPv4 9475566      0t0  UDP *:26000 
+dreamview   883     root   81u  IPv4 9475577      0t0  UDP *:26014 
+dreamview   883     root   82u  IPv4 9467772      0t0  TCP localhost:8888->localhost:47754 (ESTABLISHED)
+dreamview   883     root   83u  IPv4 9475579      0t0  UDP *:26015 
+dreamview   883     root   84u  IPv4 9475580      0t0  UDP localhost:39518 
+dreamview   883     root   88u  IPv4 9467776      0t0  TCP localhost:8888->localhost:47772 (ESTABLISHED)
+dreamview   883     root   89u  IPv4 9467777      0t0  TCP localhost:8888->localhost:47776 (ESTABLISHED)
+systemd-r   895    statd   12u  IPv4    2646      0t0  UDP 127.0.0.53:domain 
+systemd-r   895    statd   13u  IPv4    2647      0t0  TCP 127.0.0.53:domain (LISTEN)
+cyber_rec  1121     root    8u  IPv4 9473997      0t0  UDP *:26000 
+cyber_rec  1121     root    9u  IPv4 9474010      0t0  UDP *:26016 
+cyber_rec  1121     root   10u  IPv4 9474014      0t0  UDP *:26017 
+cyber_rec  1121     root   11u  IPv4 9474015      0t0  UDP localhost:59255 
+cyber_rec  1121     root   15u  IPv4 9474016      0t0  UDP *:57085 
+cyber_rec  1121     root   16u  IPv4 9474017      0t0  UDP *:8888 
+avahi-dae  1171      111   12u  IPv4   27868      0t0  UDP *:mdns 
+avahi-dae  1171      111   13u  IPv6   27869      0t0  UDP *:mdns 
+avahi-dae  1171      111   14u  IPv4   27870      0t0  UDP *:60202 
+avahi-dae  1171      111   15u  IPv6   27871      0t0  UDP *:42218 
+ovsdb-ser  1299     root   19u  IPv4     770      0t0  TCP localhost:6640 (LISTEN)
+mpd        1419      137    4u  IPv6     537      0t0  TCP *:6600 (LISTEN)
+memcached  1420      128   26u  IPv4   34894      0t0  TCP localhost:11211 (LISTEN)
+tgtd       1421     root    6u  IPv4   28170      0t0  TCP *:iscsi-target (LISTEN)
+tgtd       1421     root    7u  IPv6   28171      0t0  TCP *:iscsi-target (LISTEN)
+sshd       1443     root    3u  IPv4  823104      0t0  TCP *:ssh (LISTEN)
+sshd       1443     root    4u  IPv6  823106      0t0  TCP *:ssh (LISTEN)
+xrdp-sesm  1444     root    7u  IPv6   16915      0t0  TCP localhost:3350 (LISTEN)
+nxserver.  1449      124    8u  IPv4   28224      0t0  TCP localhost:21747 (LISTEN)
+nxserver.  1449      124   15u  IPv4 3266416      0t0  UDP *:mdns 
+nxserver.  1449      124   16u  IPv4 3266465      0t0  UDP 192.168.122.1:mdns 
+nxserver.  1449      124   17u  IPv4 3266466      0t0  UDP 172.17.0.1:mdns 
+nxserver.  1449      124   18u  IPv4 3266467      0t0  UDP 192.168.31.190:mdns 
+xrdp       1466      123   11u  IPv6   31158      0t0  TCP *:3389 (LISTEN)
+mysqld     1481      132   22u  IPv4   34904      0t0  TCP localhost:mysql (LISTEN)
+nxd        1593      124    3u  IPv4   34006      0t0  TCP *:4000 (LISTEN)
+nxd        1593      124    4u  IPv6   30668      0t0  TCP *:4000 (LISTEN)
+nmbd       1677     root   15u  IPv4   23292      0t0  UDP *:netbios-ns 
+nmbd       1677     root   16u  IPv4   23293      0t0  UDP *:netbios-dgm 
+nmbd       1677     root   17u  IPv4   45244      0t0  UDP 192.168.122.1:netbios-ns 
+nmbd       1677     root   18u  IPv4   45245      0t0  UDP 192.168.122.255:netbios-ns 
+nmbd       1677     root   19u  IPv4   45246      0t0  UDP 192.168.122.1:netbios-dgm 
+nmbd       1677     root   20u  IPv4   45247      0t0  UDP 192.168.122.255:netbios-dgm 
+nmbd       1677     root   21u  IPv4  830626      0t0  UDP 192.168.31.190:netbios-ns 
+nmbd       1677     root   22u  IPv4  830627      0t0  UDP 192.168.31.255:netbios-ns 
+nmbd       1677     root   23u  IPv4  830628      0t0  UDP 192.168.31.190:netbios-dgm 
+nmbd       1677     root   24u  IPv4  830629      0t0  UDP 192.168.31.255:netbios-dgm 
+nmbd       1677     root   25u  IPv4   45252      0t0  UDP 172.17.0.1:netbios-ns 
+nmbd       1677     root   26u  IPv4   45253      0t0  UDP 172.17.255.255:netbios-ns 
+nmbd       1677     root   27u  IPv4   45254      0t0  UDP 172.17.0.1:netbios-dgm 
+nmbd       1677     root   28u  IPv4   45255      0t0  UDP 172.17.255.255:netbios-dgm 
+apache2    1772     root    4u  IPv6   31297      0t0  TCP *:http (LISTEN)
+dnsmasq    2724      134    3u  IPv4   40370      0t0  UDP *:bootps 
+dnsmasq    2724      134    5u  IPv4   40373      0t0  UDP 192.168.122.1:domain 
+dnsmasq    2724      134    6u  IPv4   40374      0t0  TCP 192.168.122.1:domain (LISTEN)
+smbd       2832     root   32u  IPv6   39187      0t0  TCP *:microsoft-ds (LISTEN)
+smbd       2832     root   33u  IPv6   39188      0t0  TCP *:netbios-ssn (LISTEN)
+smbd       2832     root   34u  IPv4   39189      0t0  TCP *:microsoft-ds (LISTEN)
+smbd       2832     root   35u  IPv4   39190      0t0  TCP *:netbios-ssn (LISTEN)
+kdeconnec  3148     1000   13u  IPv6   41479      0t0  UDP *:1716 
+kdeconnec  3148     1000   14u  IPv6   41480      0t0  TCP *:1716 (LISTEN)
+nxnode.bi  4113     1000   15u  IPv4   44899      0t0  TCP localhost:12001 (LISTEN)
+nxnode.bi  4113     1000   16u  IPv6   52262      0t0  TCP localhost:afs3-callback (LISTEN)
+nxnode.bi  4113     1000   17u  IPv4   52263      0t0  TCP localhost:afs3-callback (LISTEN)
+nxnode.bi  4113     1000   21u  IPv4   53368      0t0  TCP localhost:42142->localhost:25001 (ESTABLISHED)
+nxclient.  4137     1000   13u  IPv4   51320      0t0  TCP localhost:25001 (LISTEN)
+nxclient.  4137     1000   17u  IPv4   51345      0t0  TCP localhost:25001->localhost:42142 (ESTABLISHED)
+cyber_mon  5222     root    7u  IPv4 9529499      0t0  UDP *:26000 
+cyber_mon  5222     root    8u  IPv4 9529513      0t0  UDP *:26018 
+cyber_mon  5222     root    9u  IPv4 9529518      0t0  UDP *:26019 
+cyber_mon  5222     root   10u  IPv4 9529519      0t0  UDP localhost:44727 
+cyber_mon  5222     root   15u  IPv4 9530501      0t0  UDP *:8888 
+cyber_mon  5222     root   20u  IPv4 9519009      0t0  UDP *:26000 
+cyber_mon  5222     root   21u  IPv4 9519023      0t0  UDP *:26020 
+cyber_mon  5222     root   22u  IPv4 9519028      0t0  UDP *:26021 
+cyber_mon  5222     root   23u  IPv4 9519029      0t0  UDP localhost:51036 
+chrome     5309     1000   78u  IPv4 3273179      0t0  UDP 224.0.0.251:mdns 
+chrome     5309     1000  195u  IPv4 3273181      0t0  UDP 224.0.0.251:mdns 
+chrome     5350     1000   32u  IPv4 3276828      0t0  UDP 224.0.0.251:mdns 
+chrome     5350     1000   33u  IPv4 8332385      0t0  TCP 192.168.31.190:39776->lb-192-30-253-125-iad.github.com:https (ESTABLISHED)
+chrome     5350     1000   34u  IPv4 9889912      0t0  TCP 192.168.31.190:46478->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   39u  IPv4 9867886      0t0  TCP 192.168.31.190:46462->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   40u  IPv4 9890936      0t0  TCP 192.168.31.190:46480->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   41u  IPv4 9884302      0t0  TCP 192.168.31.190:46482->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   44u  IPv4 9867887      0t0  TCP 192.168.31.190:46464->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   47u  IPv4 9868802      0t0  TCP 192.168.31.190:46466->108.177.103.163:https (SYN_SENT)
+chrome     5350     1000   49u  IPv4 9582120      0t0  TCP 192.168.31.190:37928->lb-192-30-253-124-iad.github.com:https (ESTABLISHED)
+chrome     5350     1000   58u  IPv4 9479446      0t0  TCP localhost:47754->localhost:8888 (ESTABLISHED)
+chrome     5350     1000   63u  IPv4 9645100      0t0  TCP 192.168.31.190:38048->lb-192-30-253-124-iad.github.com:https (ESTABLISHED)
+chrome     5350     1000   64u  IPv4 9479449      0t0  TCP localhost:47772->localhost:8888 (ESTABLISHED)
+chrome     5350     1000   66u  IPv4 9479451      0t0  TCP localhost:47776->localhost:8888 (ESTABLISHED)
+chrome     5350     1000   70u  IPv4 9641639      0t0  TCP 192.168.31.190:38054->lb-192-30-253-124-iad.github.com:https (ESTABLISHED)
+chrome     5350     1000   99u  IPv4 9838535      0t0  TCP 192.168.31.190:59408->151.101.228.133:https (ESTABLISHED)
+chrome     5350     1000  105u  IPv4 9589062      0t0  TCP 192.168.31.190:37950->lb-192-30-253-124-iad.github.com:https (ESTABLISHED)
+git        9983     1000    3u  IPv4 9106234      0t0  TCP 192.168.31.190:33276->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git        9983     1000    4u  IPv4 9106234      0t0  TCP 192.168.31.190:33276->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git        9999     1000    3u  IPv4 8624818      0t0  TCP 192.168.31.190:32844->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git        9999     1000    4u  IPv4 8624818      0t0  TCP 192.168.31.190:32844->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       10036     1000    3u  IPv4 9106234      0t0  TCP 192.168.31.190:33276->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       10036     1000    4u  IPv4 9106234      0t0  TCP 192.168.31.190:33276->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       10222     1000    3u  IPv4 8624818      0t0  TCP 192.168.31.190:32844->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       10222     1000    4u  IPv4 8624818      0t0  TCP 192.168.31.190:32844->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+apache2   17554 www-data    4u  IPv6   31297      0t0  TCP *:http (LISTEN)
+apache2   17555 www-data    4u  IPv6   31297      0t0  TCP *:http (LISTEN)
+cupsd     17622     root    6u  IPv6  675913      0t0  TCP localhost:ipp (LISTEN)
+cupsd     17622     root    7u  IPv4  675914      0t0  TCP localhost:ipp (LISTEN)
+cups-brow 17623     root    7u  IPv4  673644      0t0  UDP *:ipp 
+git       19278     1000    3u  IPv4 6831958      0t0  TCP 192.168.31.190:60856->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       19278     1000    4u  IPv4 6831958      0t0  TCP 192.168.31.190:60856->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       19386     1000    3u  IPv4 6831958      0t0  TCP 192.168.31.190:60856->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       19386     1000    4u  IPv4 6831958      0t0  TCP 192.168.31.190:60856->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       20853     1000    3u  IPv4 2949065      0t0  TCP 192.168.31.190:57504->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       20853     1000    4u  IPv4 2949065      0t0  TCP 192.168.31.190:57504->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       20862     1000    3u  IPv4 2949065      0t0  TCP 192.168.31.190:57504->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       20862     1000    4u  IPv4 2949065      0t0  TCP 192.168.31.190:57504->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       21474     1000    3u  IPv4 9773671      0t0  TCP 192.168.31.190:34028->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       21474     1000    4u  IPv4 9773671      0t0  TCP 192.168.31.190:34028->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       21722     1000    3u  IPv4 9773671      0t0  TCP 192.168.31.190:34028->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       21722     1000    4u  IPv4 9773671      0t0  TCP 192.168.31.190:34028->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       24887     1000    3u  IPv4 9353935      0t0  TCP 192.168.31.190:33404->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       24887     1000    4u  IPv4 9353935      0t0  TCP 192.168.31.190:33404->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       25256     1000    3u  IPv4 9833005      0t0  TCP 192.168.31.190:34106->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       25256     1000    4u  IPv4 9833005      0t0  TCP 192.168.31.190:34106->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       25360     1000    3u  IPv4 9353935      0t0  TCP 192.168.31.190:33404->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       25360     1000    4u  IPv4 9353935      0t0  TCP 192.168.31.190:33404->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+dhclient  27425     root    6u  IPv4  823037      0t0  UDP *:bootpc 
+git       27550     1000    3u  IPv4 9833005      0t0  TCP 192.168.31.190:34106->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
+git       27550     1000    4u  IPv4 9833005      0t0  TCP 192.168.31.190:34106->lb-192-30-253-112-iad.github.com:git (ESTABLISHED)
