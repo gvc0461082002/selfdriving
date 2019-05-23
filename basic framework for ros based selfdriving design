@@ -1,0 +1,9 @@
+1. configure .bashrc , source all related directories
+for instance:
+export ROS_MASTER_URI=http://192.168.1.109:11311
+source /opt/ros/melodic/setup.bash
+source ~/catkin_ws/devel/setup.bash
+
+2. write all packages under catkin_ws/src folder
+every package should obey the rules as introduced from http://wiki.ros.org/ROS/Tutorials/Creating%20a%20Package%20by%20Hand
+, should include related package.xml, CmakeList.txt
