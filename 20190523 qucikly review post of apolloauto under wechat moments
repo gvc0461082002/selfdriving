@@ -1,0 +1,58 @@
+技术文档 | 如何标定车辆油门和制动
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485960&idx=1&sn=c522f0baf77bfaf4d8f24f893828e626&chksm=ea1e187add69916c4d54c12b673b267a4d8e7e7e48605fa09ed5e804ea4fa39a1d6314f644f3&scene=0&xtrack=1&key=fbb91313c19f948de09f02ec57aecc0bf4ed25bf4377ccf95e3ed3df5375629988739fa782b16661e10e7954709a508259b23bb675eaf34747eb4185764397f207d56a13e3662cf5f0406d071695b4e0&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+为实现对无人车的控制，Apollo需要知道踩刹车和减速的关系、踩油门和加速的关系等，当无人车拿到一些控制学参数后，就可以实现电脑对无人车的控制。
+
+Apollo在云端后台有巨大仿真空间，可满足每一辆无人车将遇到的复杂路况上传到云端， 网上便有庞大的数据库。可保证即便在无人驾驶算法未更新时，云端的仿真场景仍能够检验是否能够应对实时路况。这个步骤，就是为了确保每个无人车都称得上是“有经验的司机”。
+
+submitted the applicaton of using online sim, no approvement
+
+车辆校准的目的是找到准确产生从控制模块请求的加速量的油门和制动命令
+
+Apollo进阶课程 ④ | 开源模块讲解（下）
+
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485963&idx=1&sn=2c90dfaa28b116ef4a171ce3d632b226&chksm=ea1e1879dd69916fe02b705254013bb06f0d189ac3c3f423caa35a2a481568ff19ff1d051c9f&scene=0&xtrack=1&key=db09d759dd437ecf3fce48c92276431e3fa84c3ad303aa47b13a7a2678867e5f460939f35359a514e1eb0b5463a44470950bc3de3cbd1831df362a229b544a6c68c717cb0b924fc42181fdf4a27ef2fe&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+我们之所以需要各种不同的传感器，是因为它们的波长和感知范围不同。
+
+
+
+像Radar毫米波雷达，可以穿透毫米级别的障碍物。Lidar是一种纳米级别的激光波，现在比较流行的有两种：905纳米和1550纳米。
+
+
+
+1550纳米由于其波长与可见光相差的更远，对眼睛伤害更小，所以我们通常把它的功率调的比较大。相比905纳米，1550纳米可以打得更远，价格也更贵。
+
+软件开放平台（Open Software Platform）这整块是开源的，可以在Github上看到。它们实际是在一个实时操作系统上运行，可以看作一个操作系统的底层框架加一个消息的分发机制。软件开放平台还包括map engine，定位、感知、规划、控制等技术模块。
+
+
+
+最上面一层是云端服务平台，车在路上跑需要和云端有一定的交互，云端计算出模型再把它下发到车上。
+
+
+
+所以云端包含这些服务：HD Map，百度子公司有采集地图的资质。Simulation，帮助我们理解路况。此外还有，Data Platform、Security、OTA、DuerOS。
+
+
+Apollo进阶课程 ② | 开源模块讲解（上）
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485887&idx=1&sn=8fa417fb7a26c8e1d403f239512f2d2e&scene=21#wechat_redirect
+
+除此之外，无人车在接收不到GPS信号的情况下，需要用到另一个技术——几何定位。
+
+
+
+几何定位的原理和GPS原理差不多，就是在道路上选几个feature，根据这些feature计算无人车所在的位置。几何定位的精度很高，可以精确地算出无人车所在的位置。所以，目前比较流行的定位技术就是GPS、IMU和几何定位等一系列技术的融合。
+
+激光雷达的最大优点就是对距离的判断非常精准，但它也有个很大的缺点，就是对环境的要求非常高，比如在雾霾天气里激光雷达的精准度就会降低很多。
+
+Apollo进阶课程 ③ | 开源模块讲解（中）
+
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485920&idx=1&sn=b3276735aa2c55b4b206aff1ab8c97ed&chksm=ea1e1b92dd699284886513e44f1767b2f21766f7d5c5070a8cca470c0c5062a2b3a4d6f40b0b&scene=21#wechat_redirect
+
+首先为大家介绍安全方面最基础的一个模块ISO-26262。ISO-26262是一个非常复杂、非常结构化的标准。比如说，如果一个硬件达到了ASIL D级别的要求，那么它的故障率是10 fit （Failures In Time, in one billion device-hours of operation），即10亿个小时里面出一次故障。这个故障率要比windows蓝屏的概率低很多。
+
+
