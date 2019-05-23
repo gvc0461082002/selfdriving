@@ -55,4 +55,202 @@ https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485920&idx=1&sn=b32767
 
 首先为大家介绍安全方面最基础的一个模块ISO-26262。ISO-26262是一个非常复杂、非常结构化的标准。比如说，如果一个硬件达到了ASIL D级别的要求，那么它的故障率是10 fit （Failures In Time, in one billion device-hours of operation），即10亿个小时里面出一次故障。这个故障率要比windows蓝屏的概率低很多。
 
+技术文档 | 如何添加新的控制算法
+
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485991&idx=1&sn=72c2f5b1d19a82661a7d0e9146318c3b&chksm=ea1e1855dd699143a036cfcb255f9d25981a628133bc63e9a3a677ed196db77e624341fa34eb&scene=0&xtrack=1&key=fbb91313c19f948d9059893c1ef6aaf59fb2c91f3bf989de9bc3f8421c6de7eb45d02ea850814b9ef361b3989b282ac102b71865bc2358f0e378240466ccc65b66a48124f77516bbae199756f980b53f&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+Apollo中的控制算法由一个或多个控制器组成，可以轻松更改或替换为不同的算法。 每个控制器将一个或多个控制命令输出到CANbus。 
+
+Apollo中的默认控制算法包含横向控制器（LatController）和纵向控制器（LonController）。 它们分别负责横向和纵向的车辆控制。
+
+新的控制算法不必遵循默认模式，例如，一个横向控制器+一个纵向控制器。 它可以是单个控制器，也可以是任意数量控制器的组合。
+
+添加新的控制算法的步骤： 
+
+创建一个控制器；
+
+在文件control_config 中添加新控制器的配置信息；
+
+注册新控制器。
+
+开发者说 | Apollo仿真环境搭建傻瓜教程
+
+cited from https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247485998&idx=1&sn=4656da82270ac39d0eb20545a2760eac&chksm=ea1e185cdd69914ab7e48236ddf39cd5b61b2d4667a3bc55fe4697eae9cf399f60da7d3ee6fa&scene=0&xtrack=1&key=7cdbdfe8ad7a4f03f7bf78ccd41c48eb874af2013fd0b574667863deb489ec9c2f09f642c08f748f4e4ce8907c6532a4e782044233a5e12c44997c02deecc0187015371e4fcfc2772bf74ca67434e258&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+Apollo仿真环境搭建必须要具备以下四个条件，如果不具备，就不必往下进行。
+
+查看你的CPU是否支持FMA和AVX，否则仿真环境Dreamview无法启动（当在浏览器中输入http://localhos:8888，会出现"Unable to connect"的错误）。
+
+
+浏览器必须支持WebGL，否则仿真界面无法显示动画，这实际上隐含了对GPU的要求，可以不是Nvidia的，但要有。百度提供的仅有CPU的编译选项，只是水中花、镜中月。
+
+
+必须要有CAN卡的驱动程序，因为这个驱动程序不是开源的，需要你购买硬件时才能提供，虽然只用到了其中的两个文件。
+
+
+硬盘至少50G，内存至少4G。
+
+Apollo问答 | Build时出现问题如何解决？
+
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486002&idx=1&sn=c5e293a2b3a33036877603b9b8149214&chksm=ea1e1840dd6991561241b268a61818c05f2f923407949bbf0924cd576fabd6974e2a5b8f9289&scene=0&xtrack=1&key=7cdbdfe8ad7a4f032a0c00453c9e8f44261177c621815f4f94f37b6667b263ef0e951507900fd015a568cf49d4cb4cab590de27c8c49a38f733731132af03e0e9a856599249e7817de4c449c03c766a6&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+进阶课程 ⑤ | Apollo硬件开发平台介绍
+
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486032&idx=1&sn=3ddc44038aaaa703977f486829bd1189&chksm=ea1e1822dd699134dddd8187294999df97a51d8dca086a7493e1998c0a516822e3bd1de1e8b1&scene=0&xtrack=1&key=fbb91313c19f948d033ddd2582632d6b5d37c5aeff9c1ad4813471d22616cf7f48f04ac8675acdbf28c1f8457ec33ddc855bd9eb0c98640ffe757c46254eab1dec7e6255482e89ad36786ca21bd664bc&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+技术文档 | 如何添加激光雷达驱动程序
+
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486086&idx=1&sn=fce823dc61dd08b549cf4482adf1d47d&chksm=ea1e18f4dd6991e2ec7f99c288919d05a228a556d88d29031b19a658b41108ca94bdf617a266&scene=0&xtrack=1&key=7cdbdfe8ad7a4f035143219dc019c70204258c5409c090d2a5cd8a0ac36f0d7e013996d6f66b7c1ca734b46958c7e8f0a1343f35cea8d600b296356f75f81cc5d9aa7eb051a291802e698a31bf88f62b&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+本文主要介绍Lidar驱动的主要功能以及如何在Apollo平台中添加一款新的Lidar设备驱动。
+
+Driver: 通过网络端口接收Lidar硬件产生的UDP数据包，将每一帧封装成VelodyneScan格式后发送。
+
+Parser:接收VelodyneScan数据，把VelodyneScan中的点由球面坐标系转换成空间直角坐标系下的Pointcldoud点云格式后发送。
+
+Compensator:接收点云数据和Pose数据，根据每个点的对应的Pose信息把点转换到点云中最大时刻对应的坐标系下，减小由车辆自身的运动带来的误差。需要点云数据中包含每个点的时间戳信息。
+
+Apollo进阶课程 ⑥ | 高精地图与自动驾驶的关系
+
+cited from
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486105&idx=1&sn=0821822049986216921cfa9c9c8d20d0&chksm=ea1e18ebdd6991fd1a2dabba347783a219c8baa2b42e80c9416238801e3226136562255b5fd0&scene=0&xtrack=1&key=7cdbdfe8ad7a4f038049cc26eef56f9f15d9274b9c6fa1fd59a498d3df2c5f69bf9864fd502d55b9fa0a712f68a694df53a4fd51729e0e5bccbb8601fe9729ae98a26290b49e2ed6064e5fa6b715c83a&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+导航地图只是给驾驶员提方向性的引导。识别标志标牌、入口复杂情况、行人等都是由驾驶员来完成，地图只是引导作用。导航地图是根据人的行为习惯来设计的。
+
+ 
+
+高精地图完全为机器设计的。因为对于道路的各种情况、人都能理解，但是对于车辆来说它完全不理解。
+
+
+技术文档 | DreamView用法介绍
+
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486189&idx=1&sn=e2033f876ff5551f974d79e462950c50&chksm=ea1e189fdd699189c5ce31e311fe25b70e22b8e4ce5a2baaf14791e8e3fe7bf3e8718126302e&scene=0&xtrack=1&key=d0af80d42a2df10f0b0d61f316e29a44fb8e39b0b201fdbd9f3ed98c5cbb4c75d8bc912cb7891fee460fefbe4bf5a3e31602f9e6d3fb05a2111ad29566aeafdd32244744a77dfd150af93bdf8f4d8d4e&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+Apollo进阶课程 ⑦ | 高精地图的采集与生产
+
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486279&idx=1&sn=25e37e63cd94e0d0028ca20276302e67&chksm=ea1e1935dd6990232b9e8237bd72b0012309c7ce3b0578e95bb7c13de10917ef5e34b78b7090&scene=0&xtrack=1&key=7cdbdfe8ad7a4f036e14fe45a4cbff637a09dca399ab452bf4c5e799fe1bc4f3976d9e33bf78c85691ea8202f7c571f1ee0b74e825557d35b42f0f4bc31a65c071b34772f02e2bb814ab254997032009&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+高精地图采集所需要的传感器主要有 GPS 、 IMU 、 轮速计 三类
+因此，空旷地带的GPS精确、好用 。
+
+
+
+这就是为什么很多公司刚进入自动驾驶领域研发时，都会选择「高速路线」的原因。
+
+ 
+
+而在城市道路环境下，GPS将会非常难用。
+
+
+
+这是由于高楼等障碍物遮挡，导致自动驾驶汽车所能接收到的GPS信号发生偏移。一般来说，GPS在城市中定位的「平均偏差」在50米左右。
+通过将GPS、IMU和轮速计测出的数据进行「融合」，再运用「Slam算法」，对Pose进行「矫正」，最终才能得出一个「相对精确的Pose」。
+
+
+
+最后把空间信息通过激光雷达「扫描出三维点」，转换成一个「连续的三维结构」，从而实现整个空间结构的「三维重建」。
+
+
+Apollo问答 | base_map.bin文件如何转化？
+
+cited fromhttps://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486290&idx=2&sn=276ad7c7b8813c99599cd918798953a7&chksm=ea1e1920dd6990368e23bd816ee1f3c0a3cebbfa3e5667e818d7da71c564590fea6758c5e91e&scene=0&xtrack=1&key=fbb91313c19f948d89d293f20cc1329c81148f4ad64c70eb49af8b4338ac42ae4e650975e2e776fe5e0df410d91352f771e459d0bdf468d909980698947778a3ac225ae5a704c7bc05cd5a7f22c31759&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+
+技术文档 | 如何使用Cyber RT创建新组件
+
+cited from
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486294&idx=1&sn=5dfcd5ad76d6dd880cfe8cb9477c556b&chksm=ea1e1924dd699032d994c061fed616d786e15fdb1eb0c78ccd7a2deeb34efa3608e3274d2bd0&scene=0&xtrack=1&key=fbb91313c19f948dcb145f6a6ec5cc158258409691361655ffec43714aa3628740108744c1bdcd8302f60b2ce5b8be5efc57c26ef559902ba12870373ba40cd8f105308e20f24859430dc8c62112ca70&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+例如组件的根目录为
+
+/apollo/cyber/examples/common_component_example/
+
+需要创建以下文件：
+
+
+
+Header file: common_component_example.h
+
+Source file: common_component_example.cc
+
+Build file: BUILD
+
+DAG dependency file: common.dag
+
+Launch file: common.launch
+
+直播回顾 | Apollo 3.5 计算框架（Cyber RT）设计分享
+
+cited from 
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486304&idx=1&sn=f867c90d03c92c885a8ba7a3ccdb9bbb&chksm=ea1e1912dd6990048d7ab4b9e819d829954146fd7c7c50a621f111ce22f071e0847f5afd6d1b&scene=0&xtrack=1&key=fbb91313c19f948ddf2c39db17c8e121d70385651617d280bea0123e9f3488099def9684f5154af61423a857c13e3d6585562fdd30b51587a0a582582a781749c65c8c395144a0b189fcf852aef103ca&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+Cyber RT为开发者提供了Component类，开发者的算法业务模块只需要继承该类，实现其中的Proc接口即可。
+
+该接口类似于ROS中的Callback，消息通过参数的方式传递，用户只要在Proc中实现算法、消息处理相关的逻辑。
+
+Apollo进阶课程 ⑧ | 高精地图的格式规范
+
+cited from 
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486305&idx=1&sn=eb53cb79ac2dc77d5029037ee29da87d&chksm=ea1e1913dd69900564c20e51eda1c007892019d30556c61987a9585ef8986dad644ae2fc4b41&scene=0&key=db09d759dd437ecf1d19032693add56c7766d12a41418ff3f5a817395cbd44e61d1a615db97c03d7afe1553e9a6a06e1dcbaf60fbea0696e8fd0aea86417d7f2b739b66ac149c5a06696e0fb8726d3df&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+Apollo目前采用的Camera融合激光雷达的方案
+
+开发者说 | 手把手教你写卡尔曼滤波器
+cited from
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486367&idx=1&sn=809b181e9cb54d3f268e065fe31b8071&chksm=ea1e19eddd6990fba657edbcc7545aa1119b7043c046af830f19046f64ae0ce4e162a5d3129c&scene=0&xtrack=1&key=f417dd7ec1ae24de628bc50f57c03633c17f180679d3dfa628863dfc89bf46d29288d22b126dd7eb024d32c9a49d126be1e95d7026932c3a9f1188fc4f5b2e54fb6d5e1a34a55a5655f484a3e9a42781&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+无人驾驶技术入门软件篇已经介绍了传感器数据的解析和传感器信息的坐标转换。
+
+
+
+这两步完成后，我们就会获得某一时刻，自车坐标系下的各种传感器数据。
+
+
+
+这些数据包括障碍物的位置、速度；
+
+
+
+车道线的曲线方程、车道线的类型和有效长度；
+
+
+
+自车的GPS坐标等等。
+
+
+
+这些信号的组合，表示了无人车当前时刻的环境信息。
+
+
+
+由于传感器本身的特性，任何测量结果都是有误差的。
+
+
+
+以障碍物检测为例，如果直接使用传感器的测量结果，在车辆颠簸时，可能会造成障碍物测量结果的突变，这对无人车的感知来说是不可接受的。
+
+
+
+因此需要在传感器测量结果的基础上，进行跟踪，以此来保证障碍物的位置、速度等信息不会发生突变。
+
+技术文档 | Apollo激光雷达-IMU(惯性测量单元)校准服务
+
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486372&idx=1&sn=727ea6633c07965e92b86c7a17cd750e&chksm=ea1e19d6dd6990c0e1d1208b51ee0c966bdc400879cc99c28f743de2869fa223bc73cd000f55&scene=0&xtrack=1&key=d0af80d42a2df10f0b9471dfd451f326e0f2336f190f47b36bde71c844abf95065be7ca3268f02a8776172e6769ebb00724c7016a8a4212e07661619c36d5673f288526cd3cbf096d3c8e6d9b717743a&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
+
+本文为Apollo3.5的官方技术文档。主要描述64线激光雷达（LiDARM）和内部导航系统（INS）之间外部校准服务的方法。
+
+技术文档 | Apollo传感器标定指南
+
+
+
 
