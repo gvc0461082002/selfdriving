@@ -251,6 +251,203 @@ https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486372&idx=1&sn=727ea6
 
 技术文档 | Apollo传感器标定指南
 
+cited from
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486430&idx=1&sn=462f90aeff6468f6edcd74b12375b4a0&chksm=ea1e19acdd6990ba19a1ae943e1aeda66ef7a6a44566ec65695d393fd2e8f8d40cb5a915ae3f&scene=0&xtrack=1&key=7cdbdfe8ad7a4f037578b0d24500ea2e8b793c273522cd1216be7c49ce3b85555183b788368f09d58f68d36747029d9884ff2ac71b5c41d4d60abe63cebcc5247d7409903978c9cb24ef3c8aafb8e4dc&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=IvDJmayor626oqbgc2U8ybrdbtFcSfXnhtP%2BYZC2Bxp0pd0kMH9CRUziOySUKkTX
 
+
+自动驾驶传感器标定(Calibration)，是指利用传感器采集的数据计算各传感器的内参数(Intrinsic Parameters)，以及多个传感器之间外参数(Extrinsic Parameters)的过程。
+
+
+进阶课程⑩ | Apollo地图采集方案
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486437&idx=1&sn=52692e9c12dc65c3432de3df2e07a60d&chksm=ea1e1997dd69908123b1145d41abac6ba62bccaeb37b0f8dbe50acc7776d2c41abf563b6e572&scene=0&xtrack=1&key=fbb91313c19f948d8941bd6b6f5a70254579ed61313adfbeab3955facf048e50205d127b1c2c3e22fd08d7b0033561077298de1674a6ed5cc3894938681772277f0063d561155a1416b3e367943c3a30&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+技术文档 | 二次规划（QP）样条路径
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486492&idx=1&sn=2bfb421186364cbd6b00fb278a4a70fe&chksm=ea1e1e6edd699778417d0b1dc6e009b445c8c03218d555f5c872ecc08f49f4b1767fcabdd029&scene=0&xtrack=1&key=db09d759dd437ecf38fcefb5b852c3805ad2ea3884223c16059d940578202396b13e84a0bae817a4ad86c4b10e07f5ae8e4215523af461ea3a93c18ec482059b3d78c6d0d891bcebcc0c57032f518bcb&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+Apollo的Planning分为参考线平滑、决策、路径规划、速度规划等部分。
+
+
+从整体上来说，规划模块的架构分为两个部分：一部分负责对数据的监听、获取和预处理；另一部分负责管理各个优化模块。数据进入后，对其综合处理为规划模块的内部数据结构，由任务管理器调度合适的优化器进行各个优化任务。综合优化的结果，经过最终的验证后，输出给控制模块。
+
+
+
+在设计上，实现了策略的可插拔，使得各个优化器可以灵活配置不同策略，提升迭代效率。
+
+
+
+
+EM-Planner是具体的规划实施类，它基于高精地图、导航路径及障碍物信息作出实际的驾驶决策，包括路径、速度等方面。
+
+
+首先使用DP（动态规划）方法确定初始的路径和速度，再利用QP（二次规划）方法进一步优化路径和速度，以得到一条更平滑的轨迹，既满足舒适性，又方便车辆操纵。
+
+
+
+基于样条的车辆轨迹优化二次规划，为了寻求更优质更平滑，体感更好的路径，需要使用二次规划的方法寻找。需要的限制条件有：曲率和曲率连续性、贴近中心线、避免碰撞。
+
+进阶课程 ⑫ | Apollo高精地图
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486502&idx=1&sn=fa2bdbb04d8589581c698425a7a0e8e0&chksm=ea1e1e54dd6997427ac1ba46eba4a0703ae669b13f7b3a9bb5c20495eb3a604793f8a95c1856&scene=0&xtrack=1&key=7cdbdfe8ad7a4f0360c27837ed36a92486d4b5199566005404b8428fcf4906725d6fd20d9c1200af007a3e47734e923415e7229b4f77710fadf1df508c5eb47c32f66fab65ad0b9a6fb666d99b7d45a5&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+开发者说 | Apollo控制算法之LQR
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486554&idx=1&sn=4e3655d0adf0ba126b49d03df63bc64a&chksm=ea1e1e28dd69973eab7f08b2c520d4258877a7dcff8533646d2282bf5cb98a7999e9794a236f&scene=0&xtrack=1&key=db09d759dd437ecf059503a3f88d7fce3116c1e15e3d67e45ed6f2547f247b36155d2e5a465b4980669f4c8a786fec580cd52ca3d367f0b3db6ad27ab68ee9682aeb7ab0ac2ba4d741d0d6e1ed99e559&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=z
+
+
+
+进阶课程 ⑬ | Apollo无人车自定位技术入门
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486558&idx=1&sn=efcdcbbdd792da2fa9c6522266d8a000&chksm=ea1e1e2cdd69973a0e543733ddcf0e72f2f302e303f2f032a6a1e5bf1bc70c6de4fe1de50178&scene=0&xtrack=1&key=fbb91313c19f948df3563507644049289a83b0a98ba144b2e5de1dce1363615529b0c03159c15a08ca5b0465ba6e221e9e3664dc983b8365c7e9589df5102e350c04742c7bf521f713962b948af84fe4&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRIh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+
+基于电子信号的定位方法中最有特点的就是GNSS（全球导航卫星系统）。它的作用机制是通过一组卫星的伪距、星历、卫星发射时间等观测量，以及用户钟差，得知你现在大概的位置。
+
+
+
+航迹推算最有特点的就是IMU。航迹推算就是根据上一时刻“我“的”位置“和”姿态“，叠加一些测量信息可以知道现在的”位置“和”姿态“。
+
+
+
+IMU是一个惯性测量单元。它包含了加速度计和陀螺仪。加速度计会输出加速度的信息。但是不止加速度，它还包含重力加速度。陀螺仪是一个旋转，即是前面所讲到三个轴上的一个旋转。
+
+
+
+环境特征匹配相对较多，比如LiDAR的匹配。在建好了点云定位的地图，将LIDAR的数据和已建好的地图做匹配，以此来计算自己的位置。或者通过摄像头，知道了一些车道线，红绿灯的标志，然后确定自身的位置。
+
+技术文档丨Apollo3.5 软件架构
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486582&idx=1&sn=d34819b3f4eaa8fea62e39ec66fbdb8e&chksm=ea1e1e04dd699712d881de65768fac311f71b63cf4cbf8dac984a3f90e8423c248dbf3cfc061&scene=0&xtrack=1&key=d0af80d42a2df10fd7b4c50a154e6d0a06db7ce93d73e2d315414a307c6d6742f2aee18842ce512bc1e51fc381aafec7979739e7f3874d385505a8b3a9bcac075cd469d10bc06319b2830d087e78b34b&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+开发者说 | 初识图像之初级车道线检测
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486709&idx=1&sn=5f954a28aec5db0a16bc9de8d29391fe&chksm=ea1e1e87dd69979124368c299566acd68237eeaa39dd24af5272820732583df03943aacf5ded&scene=0&xtrack=1&key=7cdbdfe8ad7a4f035e4bd94a7fdfc95c30a0c044715b7a5b9d7c0cf6f954b9fd1f044b3e2ff989a25774606f1a953e844dae2a5a2c7580dae76019018036f327ed284dd201a80dc5ad22529eedb3338a&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+国内大部分厂家都采用GPS RTK做绝对定位，不过RTK缺点也是很明显的。RTK确定整周模糊度的可靠性为95~99%，在稳定性方面不及全站仪，这是由于RTK较容易受卫星状况、天气状况、数据链传输状况影响的缘故。
+
+
+
+首先，GPS在中、低纬度地区每天总有两次盲区（中国一般都是在下午），每次20～30分钟，盲区时卫星几何图形结构强度低，RTK测量很难得到固定解。其次，白天中午，受电离层干扰大，共用卫星数少，因而初始化时间长甚至不能初始化，也就无法进行测量。
+
+
+
+根据实际经验，每天中午12点～13点，RTK测量很难得到固定解。再次，依赖GPS信号，在隧道内和高楼密集区无法使用。 
+
+
+进阶课程 ⑮丨Apollo自动定位技术详解—百度无人车定位技术
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486760&idx=1&sn=4298eb50b6ad860bb503285df04ca29f&chksm=ea1e1f5add69964cc2686c4babf0fcabc883d50aa644fcf5e2857818a2754b05f370d8dac818&scene=0&xtrack=1&key=f417dd7ec1ae24deec1e11c08d0da2ca797fd91d09acaf8c5031d7a3c468d16241431a260ae78b3f6f5106e446d5cbdc21d9ea6a04919c13eefb13e8510b31fde94a3d33e628010745c3f6b299e01aba&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+技术文档丨Cyber RT 协程技术解读
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486780&idx=1&sn=6e406ca08ed9eae02040cf6f4db8e784&chksm=ea1e1f4edd699658b8d52a4a0e73dcd6811e13e8b09252669cf0ade8c7f252d01e4c75360491&scene=0&xtrack=1&key=db09d759dd437ecff9e1008054d9eb0fccfb4397e80f40b0e6effc00761c1faa22ba50c5d4e99c135cbd35b20d8c725788a1dfdcea5f0f76c109ea49883170ef88b6903445e19162bfdbb22c0ca5f5d3&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+开发者说丨Apollo代码学习—模型预测控制（MPC)
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486833&idx=1&sn=a6eeb113a7b0f4ff64a69228ab025d36&chksm=ea1e1f03dd699615f82abc37cac40c7518965fa8d2ec90fcca2c3c440785192d7aa3acd927e8&scene=0&xtrack=1&key=f417dd7ec1ae24deade8d302ada36da7bf520b98fc5a3bb510bc3faca8bccb250f246bcdd0fc032a8291d9b76076ac639b48d6dabae6777ebc3ea0c1b74f16d686c1420793fe6d3aa152c5f1d517d2c9&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+开发者说 | 再识图像之高级车道线检测
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486897&idx=1&sn=68a59ce82378f0778fd963702acb6662&chksm=ea1e1fc3dd6996d516f2cc9908cadf6534294206efec2c63bb18c4fbd89b1a2b55d543ea8f82&scene=0&xtrack=1&key=7cdbdfe8ad7a4f0308260cdde2e67be0be433579c182f3209e9e0cdf9a5b70be083848a026d902a24bb746ecdd5165b501388a7e40c58b1e1d4666778816072c353bf98b0c36a83ee4ac36fdc422dd18&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+技术文档丨Cyber RT 进程间通信
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486929&idx=1&sn=49f66cd91857cc5f5e08128646e91a08&chksm=ea1e1fa3dd6996b57f6a8dfdabdef9ef64ab03fa2704785007c7af47819e717b41c71e57da61&scene=0&xtrack=1&key=7cdbdfe8ad7a4f03f0d58067ddd8dbe5a41098f90f0f9cc83d7e64fe0a4e8d27cfa2f14b33b4217de9aa7a61e95a94556be5b5799dce542b631fba5a19440b1d5153da9aabf4f6e4256be637ff96d043&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+开发者说丨初识深度学习之交通标志分类
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486931&idx=1&sn=9241fcff4f6af26fde3291348642f94c&chksm=ea1e1fa1dd6996b798ee89a3028aef245f4a9de5abaa6ccac07ad9775bce106fb5961608b3f6&scene=0&xtrack=1&key=f417dd7ec1ae24deb757e25e084e2cf3522e0e0b134f521d83bd7a2517d0bca87d3f7ee1a30c3b16def25d34746af49ad2f38b28abb1a7f8af3e848671d0143bcceb1c318174f0833f3f69f41bf85203&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+技术文档丨3D 障碍物感知
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247486951&idx=1&sn=63640b1b3afc8874489e38501e491e89&chksm=ea1e1f95dd6996835c3a856ebe2fb2e85a06be3a8bae0fb6c588e92ec9ddcdf685f8ed23e950&scene=0&xtrack=1&key=f417dd7ec1ae24dea495448afee8f767f3812c683478d135379a87c22555736be9d658d77a0e604e99db2d9e03ae4a600a4f0b57e23ee29d84fb2ad82861ce32324983032e2e0c3d9d1e91ea879244ab&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+3D障碍物感知（激光雷达数据+高精度地图数据)：
+
+
+
+1.高精度ROI过滤：通过当前位置查找当前位置附近范围内的高精度地图区域 + 激光雷达的区域进行俯视图2D视角进行取交集。
+
+
+
+参数：range（-a, a)代表激光雷达的俯视图矩形范围。cell_size 代表这个矩形范围内的分辨率，即分成多少个小格子。
+
+
+
+2.#1的输出就是当前区域高精度地图区域内的激光雷达点云数据。然后用2D俯视角范围中每个格子中的尽可能多的信息输入进行深度学习训练，包括：
+
+
+
+Maximum height of points in the cell.
+
+Intensity of the highest point in the cell.
+
+Mean height of points in the cell.
+
+Mean intensity of points in the cell.
+
+Number of points in the cell.
+
+Angle of the cell’s center with respect to the origin.
+
+Distance between the cell’s center and the origin.
+
+Binary value indicating whether the cell is empty or occupied.
+
+
+
+深度学习网络模型FCNN，输出为每个格子的：
+
+
+
+中心偏移
+
+对象性
+
+积极性
+
+对象高度
+
+
+
+然后根据这些信息进行聚合操作，然后采用MinBox的规则推断出包含六个边的障碍物长方体坐标。
+
+
+
+每帧检测出的障碍物会保留一个序列，根据前后时刻追踪到速度方向推断下一刻的位置并对下一刻要检测的位置进行卡尔曼过滤，以此来矫正为更准确的位置。
+
+
+
+3.激光雷达障碍物与毫米波雷达障碍物进行融合。
+
+在使用HDMap ROI滤波器确认周围环境后，Apollo得到过滤后的点云，该点云仅包含在ROI内的点（例如，可行驶的道路和交叉区域）。大部分背景障碍物（例如道路区域周围的建筑物和树木）都已被移除，并且ROI内的点云将被送往分割模块。该模块检测并分割出前景障碍物，例如汽车，卡车，自行车和行人。
+
+技术文档丨二次规划样条ST坐标速度优化
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247487252&idx=1&sn=0eca5dec06e2ca3ad846ba60f180667c&chksm=ea1e1d66dd699470b68bbc59dfe5b3835e60ca462503fe87e7b5a26fba44ad453a381679c2a7&scene=0&xtrack=1&key=1619fd197d90359f9655b68a96bf3a83d591cc1982af6f5ccc4b7ed85cf8e00379a5716b266daae899d2df248ee835b690fdba5fabd14e48495cdfd97a5c6f17d51497088e1fc2bc4b41655eba9d190c&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+
+路径优化的目的是在满足给定的约束条件下，通过优化技术确定路径方案的最优位置。
+
+
+
+智能自动化驾驶技术是一门新兴的技术,在汽车自动驾驶的过程中,如何让汽车避开障碍物并以最短的路径到达指定的位置,是智能自动化驾驶汽车的关键性问题。
+
+
+
+近年来，基于路径优化的技术已经成为最先进的AV路径规划方法，这项技术的核心是将路径规划问题表述为一个考虑多约束和预期车辆性能的优化问题。模型预测控制（MPC）已被证明非常适合解决路径规划问题，因为它们能够处理多约束和凸问题。此外，MPC以递归方式解决路径优化问题，同时考虑到规划过程中环境状态的更新。
+
+
+
+二次规划是非线性规划中的一类特殊数学规划问题，在很多方面都有应用，如投资组合、约束最小二乘问题的求解、序列二次规划在非线性优化问题中应用等。
+
+开发者说丨Planning 模块源代码分析
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjkxOTMyNQ==&mid=2247487253&idx=1&sn=e347f33c4ea8596d9b0215d1a5a79002&chksm=ea1e1d67dd69947138b7d18169a8edec8e37824eb08f482877a498f79af7994f2c3af317d59f&scene=0&xtrack=1&key=fbb91313c19f948d01b6c8e57bd9a62a77663ad1b52757eefab20005ec6b509a330eac2187ec30551092fcee04e2405d82ed72bde9abfffd6e0020c007172f37167de38ad54c8adc48e12a9eac3a6652&ascene=1&uin=MTUyNjM4NDYyMA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=cU3BstZVIEpGrhfJp2B8StJIkP0vKWVYnSpMSlc7hQgOKcP324GUf1lpHWR24kRI
+规划（Planning）模块位于命名空间：apollo::planning，其作用在于构建无人车从起点到终点的局部行驶路径，具体而言，就是给定导航地图、导航路径、当前定位点、车辆状态、 周边目标的感知及预测信息，规划模块计算出可供控制模块执行的一条安全且舒适的行驶路径。
+
+
+
+
+规划模块输出的路径是局部路径而非全局路径。举例，如无人车需从长沙智能驾驶研究院行驶至长沙高铁南站，首先需借助Routing模块输出全局导航路径，接下来才是规划模块基于全局导航路径进行一小段、一小段具体行驶路径的规划。
+
+规划模块的作用是根据感知预测的结果，当前的车辆信息和路况规划出一条车辆能够行驶的轨迹，这个轨迹会交给控制模块，控制模块通过油门，刹车和方向盘使得车辆按照规划的轨迹运行。
 
 
