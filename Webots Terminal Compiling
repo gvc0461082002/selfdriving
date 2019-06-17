@@ -1,0 +1,9 @@
+gcc
+
+
+
+-I <searchpath to include files>
+-L <searchpath to the lib file>
+-l<thelibname>
+
+
