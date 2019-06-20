@@ -3,3 +3,7 @@ https://sumo.dlr.de/index.html
 https://sumo.dlr.de/wiki/Developer/Main#Build_instructions
 
 https://wiki.openstreetmap.org/wiki/Downloading_data
+
+#convert osm to wbt
+python importer.py --input=myMap.osm --output=myMap.wbt
+(or python3)
