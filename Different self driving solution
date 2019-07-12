@@ -25,3 +25,86 @@ multi-view monocular 3d reconstruction
 semantic segmentation/ freespace
 motion prediction
 customer-friendly 3d drone view
+
+perceive + decision
+
+perception + action
+
+revolutionlize transportation as a servie
+revolutionlize personal car ownership and utility
+
+driver present  OR   no driver present
+
+volume preduction
+
+perceptionn: hot to reach surpass human-level accureacy
+
+perceptual mistake-----> accident
+
+
+Action: what tradeoffs between safety and usefullness can be guaranteed
+
+Scale: how to enable " everywhere" autonomous driving?
+
+solution" breakton the MTBF into independent sub systems
+example:
+     subsystem 1: surround cameras
+     subsystem 2: other sensors
+     
+camera-based perception:
+    bounding-boxed pattern recognition: road users, traffic signs, traffic lights, pavement markings...
+
+Dense 3D measurements: plane+ parallax, long base-line multiview
+      Road profile, hazards, generals objjects, Depth
+
+Drivable Paths: delimiters ( road-edge, curbs), surface sgementtation , lane semnantics
+
+Behavioral patterns: where are road users going tyo be next, predict traffic
+
+1. Architecture NN topology
+2. problem modelling : hosw is the output layer reprresneted?
+3. Traing loss function: data going into trainng loss need not be the same as data during inference
+4. Ground truth data for traingi and validation: " photo-realistic" simulators enable rapid prototuyping . Produciton worthy systems must be trainied and validated on real data
+
+
+detect open-doors
+
+road bump cannot be detected from single frame texture
+
+ParallaaxNet
+   1. Unsupervised leanring of geometry from monocular video, using plane + parallax formulation
+   2. The goal: 3D representation for each pixel
+ 
+ 
+ Driving policy challenge
+     1. Do we allow an accident due to a " lpse of judgement" of driving policy?
+     2. SHould the occurence of " lapse of judgement" be measured statistically?
+     -----safety is technologiucal layer living outside of machine learning. it is like " ethics" in AI --a set of rules
+     It all boils down to a formal definition of " what it means to be careful"
+ 
+ RSS a mathematical model , formalizeing a " common sense" interpretation of whtat is means to drive safe
+ 
+ RSS: Reinforcement learning, Semanti Space, " Self Play" ,e.g. AlphaGO-0
+ 
+a.   Strategy: long term Semantic decision /planning, e.g. change lane, overtake
+b.   Tactics: short term semantic decision /planning, e.g. how when to overtake, give ,take way
+c.   Path PLanning: plan the Trajectory to execute the Tactics decision
+d.   Control: machine learning and classical control low level throtte and torque control
+ 
+     8 long range cameras
+
+color codes to mark surrouning cars
+
+HD map
+
+
+mobileye 560
+    software installation
+    vehicle database
+    online database
+    
+ 
+ 
+ 
+  
+ 
