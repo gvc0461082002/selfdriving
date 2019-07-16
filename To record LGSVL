@@ -1,1 +1,26 @@
+happened to remove simulator, then have to git it again, but the speed is slow in china
+try to use proxy, but it doesn't function well, back to hosts-edit, catch the best cdn to git the simulator
+test the release 2019.05 at ubuntu18.04 (plasma), crashed with segmentation fault
 
+the problem was solved by sudo ./simluator not ./simulator
+
+try sudo aptitude install ubuntu-desktop if sudo apt install ubuntu-desktop failed
+
+Here two computers were used to test LGSVL simulator, one for the simulator and one for autoware
+
+The simulator can be run after downloading the release version
+
+It does take a long while to compile the autoware-on-lgsvl
+1. install docker-ce, have to remove all previous docker before installation
+2. install nvidia-docker, and related nvidia-graphic driver should also be installed to make the nvidia-docker function
+3. ./build kinetic, did take a long while with lots of errors, the pop-ups are useful, errors are all resolved one by one
+4. do need a high speed network, lots of git download
+5. ./run kinetic ~/shared_dir,  to add sample data folder (shared_dir) into docker. otherwise, the autoware in the docker failed to
+find sample data.
+6. after run ./simulator, the bridge address is simply the server running lgsvl-autoware, no ports required
+7. rosbridge is used to remap topics
+8. the autoware does require high memory after start couple of lanuch files
+9. for cross computer ros communication, still have to assign the ros-master-address explictely in the .bahsrc 
+file. then source it.
+
+Generally speaking, the installation guide is useful, but lots of errors happened during installation/compilation
