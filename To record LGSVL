@@ -23,4 +23,22 @@ find sample data.
 9. for cross computer ros communication, still have to assign the ros-master-address explictely in the .bahsrc 
 file. then source it.
 
+
+Process Manager
+No protocol specified
+
+
+(gksudo:97): Gtk-WARNING **: cannot open display: :0
+No protocol specified
+Failed to connect to Mir: Failed to connect to server socket: No such file or directory
+No protocol specified
+Failed to connect to Mir: Failed to connect to server socket: No such file or directory
+Unable to init server: Could not connect: Connection refused
+Unable to init server: Could not connect: Connection refused
+Failed to parse arguments: Cannot open display: 
+Failed to parse arguments: Cannot open display:
+
+solution:  sudo xhost +
+
+
 Generally speaking, the installation guide is useful, but lots of errors happened during installation/compilation
