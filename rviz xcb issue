@@ -1,0 +1,23 @@
+Qtcreator and rviz don't work because they require qt libs from /usr/lib/x86_64-linux-gnu but links with /usr/lib/libQt* instead (you can double check it using ldd $(which qtcreator) and ldd $(which rviz)). This mess indeed has lot to do with your camera package installation.
+
+I see few ways to address this problem:
+
+1. It looks like your linker prioritize /usr/lib over /usr/lib/x86_64-linux-gnu. Check your LD_LIBRARY_PATH:
+
+echo $LD_LIBRARY_PATH
+and if it contains a /usr/lib - try to get rid of it (you must track where you update your LD_LIBRARY_PATH - is it in .bashrc or somewhere else? maybe /etc/ld.so.conf.d?)
+
+2. Set your LD_LIBRARY_PATH in .bashrc to point a valid qt dir. Remember to not override the variable, but rather extend it (put that at the end of ~/.bashrc):
+
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
+then reload the .bashrc:
+
+. ~/.bashrc
+In your experiments, you did an override when launching qtcreator and rviz so only one of these two apps was working depend on what LD_LIBRARY_PATH you set.
+
+Alternatively, you can add /usr/lib/x86_64-linux-gnu/ path in /etc/ld.so.conf.d/ - just create a new .conf file with qt path and reload everything with
+
+sudo ldconfig
+Using this method will propably break your camera package because from now on it will link with libs from your new path.
+
+3. Temporary move Qt libraries supplied with camera package (/usr/lib/libQt*) to another location and check if spinview works fine with other version of qt than 5.7. If yes - you are free to delete qt5.7 libs from /usr/lib/ as they are not needed - no sophisticated uninstall process is necessary here. You can always restore it with your camera .deb package anyway.
