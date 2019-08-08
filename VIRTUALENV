@@ -1,0 +1,2 @@
+have to create virtualenv for different projects.
+some unmaintaned projects have to use obsolete packages, requiring sepration of same package name with different versions
