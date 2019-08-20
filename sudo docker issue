@@ -1,0 +1,4 @@
+cited from https://stackoverflow.com/questions/50696747/docker-login-timeout-on-ubuntu-error-calling-startservicebyname-for-org-freedes
+
+
+sudo usermod -a -G docker your-user-name 
