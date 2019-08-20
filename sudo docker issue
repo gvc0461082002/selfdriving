@@ -2,3 +2,4 @@ cited from https://stackoverflow.com/questions/50696747/docker-login-timeout-on-
 
 
 sudo usermod -a -G docker your-user-name 
+sudo chmod 777 /var/run/docker.sock
