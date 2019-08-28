@@ -1,0 +1,9 @@
+follow up the official guide to install waymo_open_dataset
+generate dataset_pb2 and label pb2:
+
+protoc --python_out=./waymo_open_dataset waymo_open_dataset/dataset.proto
+
+then merge video
+ls *.avi | while read each; do echo "file '$each'" >> mylist.txt; done
+
+ffmpeg -f concat -i mylist.txt -c copy video_draft.avi
