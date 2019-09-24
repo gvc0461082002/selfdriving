@@ -1,0 +1,8 @@
+1. ros navigation
+2. avoid obstacles (move_base, teb_local_planner)
+3. curb following
+question 1: Robot moving sideways in RVIZ ROS
+6
+
+I have found the problem after some long search on the internet. The problem was that in Rviz, X-axis is defined as front of the robot and Y-axis is defined as the sideways. However, in my URDF I defined the robot in a way where Y-axis was its front and X-axis was its sideways. After fixing this, my robot moves normally in Rviz and Gazebo both.
+
