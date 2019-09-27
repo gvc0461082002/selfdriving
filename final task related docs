@@ -6,3 +6,145 @@ question 1: Robot moving sideways in RVIZ ROS
 
 I have found the problem after some long search on the internet. The problem was that in Rviz, X-axis is defined as front of the robot and Y-axis is defined as the sideways. However, in my URDF I defined the robot in a way where Y-axis was its front and X-axis was its sideways. After fixing this, my robot moves normally in Rviz and Gazebo both.
 
+For Perceptin:
+IMU+GPS s sensor fusion on localization
+plus wheel odeomery   : pose prediction
+plus cameras  : localization
+
+Perception:
+Object detection
+how to detect rigid object
+steps:
+1. histogram of Orientation(HOG)
+2. Support Vector Machine
+how to detect non-rigid object
+Deforable Part Model(DPM)
+
+Segentation:
+
+Conditional Random Field(CRF)
+
+Stereo,OPtical Flow, and Scene Flow:
+stereo vision: Derive depth information using triangulatin techniques, Semi Global Matching(SGM)
+Optical Flow: Tranks 2D motion between two images
+Scene FLow: Tranks 3D motion between two pairs of sereo images
+
+Object TRanking
+
+MDP: Markovian Decision Process
+
+Traffic Prediction:
+1. Classification problem for categorical road object behaviors
+2. Regress problem for generating the precited path with speed and time info
+
+Lane -level Routing
+1. Modeled as  weighted directed graphs
+2. Shortest path problem: Dijkstra and A*
+HD MAP has lane info
+
+
+Behaviroal Decisions:
+1. Ruled-based 'divided and Conquer' approach: layered scenarios
+2. Markov Decision Process
+3. SYnthetic decision and indicidual decisions
+
+Motion Planning:
+1. Vehicle model, road model, and SL cooridnation system
+2. Path Planning and speed Planning
+      Path planning dynamic programming to minimize cost
+      Speed planning ST-graph
+ 
+ Feedback control
+ 1. Bicycle modrl: model vehcicles as rigid bodyies with ront and rear wheels
+ 2. PID control: proportial -integral-derivative controller
+ 
+ ROS
+ Sensors===>computing Platform==>CAN BUS===>COntrol Platform
+ 
+ Heterogeneoius COmputing: autonomous driving
+ 
+ Enabling affordable computer -vision based autonomous vehicles
+ 
+ Fast R-CNN, SSD
+ 
+ PSPNet: Ptramid Scent Parsing
+ 
+ 
+Flownet
+
+
+360 images
+
+stereo visual localizaitno: matching previous and current stereo images
+GPU, DSP
+visual map as reference
+
+: existing digital map+ground feature+spatial features+senmatic information
+
+Enabling COmputer visioned based autonomous vehicles
+
+stereo matchiing: content   CNN
+
+DSP( Sensor Data Processing)==>Thread1(localization), Thread2(localization), GPU(OBJECT RECOGNITION)==>
+Thread3(Planning), Thread4(Obstacle avoidance)
+
+
+Universial HIght PRecision Visual Map
+Layer 4: semantic information
+Layer 3: spatial features
+Layer 2: ground features
+Layer 1: Digital map with lane-level annotation
+
+
+cluod architecture to suppport video streaming and online object recognition tasks and demonmnstrate how alluxio delivers high throughout, low latency, and a unified namespace to support these emerging cloud architectures
+
+enourmous amount of unstructred/  multimeda data generated
+heterogeneous underlying storages
+require very quickly access to the 'hot' dataset
+
+SLAM+RRT
+
+NVIDIA  end TO end learning for self driving cars
+comma.ai: learning a driving simulator
+Radford: unsupervised represnetation learning deep gans
+NYU: deep multiscale video prediction bveyond mean square error
+
+left camera view+ disparity view + realscale bird view + mask disparity view
+
+create a map of   UCI campus  around 6km/h
+
+77 GHZ radar 5m,10m,  view angle is important
+
+Perceptin calibratino: ethernet connection 
+
+Perceptin: IMU+GNSS
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
