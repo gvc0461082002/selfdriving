@@ -121,17 +121,25 @@ Perceptin: IMU+GNSS
 
 
 
+Realtime road condition , vehicle /pedestrain detection, spacial information of environment, depth information of vehicles and pedestrains
+
+https://neilnie.com/2019/04/27/self-driving-golf-cart-autonomous-navigation-with-the-ros-navigation-stack-part-1-mapping/
 
 
+http://introlab.github.io/rtabmap/
+
+ 
+ http://docs.ros.org/melodic/api/nav_msgs/html/msg/OccupancyGrid.html
+ 
+ 
+ osm_cartography ROS Node
+ 
+ 
+ The commands are sent from the Jetson to an Arduino through serial communication. The Jetson simply processes the visual input from the camera and run a segmentation analysis. You can find out more about segmentation here.
+
+If the segmentation shows that there is an object in the bottom of the view that is 20% size of the image, then the Jetson will send a stopping command to the Arduino.
 
 
-
- 
- 
- 
- 
- 
- 
  
  
  
