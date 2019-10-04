@@ -140,9 +140,22 @@ http://introlab.github.io/rtabmap/
 If the segmentation shows that there is an object in the bottom of the view that is 20% size of the image, then the Jetson will send a stopping command to the Arduino.
 
 
+ carla python3.6 ,3.5 or 2.7
  
- 
- 
+ my target: 1. carla simulation  (done)
+            2. ros-carla bridge  (python3 or 2)
+            3. rosbag---SLAM---roscarla bridge---carla simulation
+
+carla simulation (2.7) // send commands to control a car
+ros-carla bridge (2.7) // get messages over topics
+SLAM( whatever python3 or 2) // generate prediction commands, sent to ros master
+
+
+
+
+
+
+            
 
 
 
