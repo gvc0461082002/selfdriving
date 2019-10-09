@@ -154,6 +154,11 @@ SLAM( whatever python3 or 2) // generate prediction commands, sent to ros master
 20191009:
 
 zed camera sdk examples, C++,
+tutorial1: https://www.stereolabs.com/docs/getting-started/application-development/#building-on-linux-and-jetson
+
+
+https://www.stereolabs.com/docs/getting-started/application-development/#building-on-linux-and-jetson
+
 
 1.  CUDA_CUDA_LIBRARY NOTFOUND 
     -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs
@@ -161,9 +166,14 @@ zed camera sdk examples, C++,
 2. nvcc not found,
     export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$ 
     export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-3. 
+3. test positional tracking
 
+4. test spatial mapping
 
+all 1-4 are c++ coding
+
+1. compiling python api for python3
+2. test several snippets in tutorials and examples
 
             
 
