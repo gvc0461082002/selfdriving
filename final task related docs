@@ -151,7 +151,17 @@ ros-carla bridge (2.7) // get messages over topics
 SLAM( whatever python3 or 2) // generate prediction commands, sent to ros master
 
 
+20191009:
 
+zed camera sdk examples, C++,
+
+1.  CUDA_CUDA_LIBRARY NOTFOUND 
+    -DCMAKE_LIBRARY_PATH=/usr/local/cuda/lib64/stubs
+
+2. nvcc not found,
+    export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}$ 
+    export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+3. 
 
 
 
