@@ -188,6 +188,13 @@ partially test ZED
 2. must complete mirroring the ubuntu whole system
 3. plan to flash tx2 with ubuntu18
 
+Tx2 flash:
+1. install jetpack,sdkmanager in the host machine
+2. get to know all ip addresses including host and the jetson tx2
+3. manual recover mode
+4, mini usb connectkon between host and jetson
+5. follow all steps
+
 
 
 
