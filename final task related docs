@@ -175,8 +175,13 @@ all 1-4 are c++ coding
 1. compiling python api for python3
 2. test several snippets in tutorials and examples
 
-            
-
+20191010
+failed to image the whole system
+locating IMU and SSD for jetson TX2
+partially test ZED
+20191011:
+1. zed-tensorflow, tensorflow-gpu==1.15
+2. nearly complete the test of ZED
 
 
 
