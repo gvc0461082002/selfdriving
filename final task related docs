@@ -194,9 +194,8 @@ Tx2 flash:
 3. manual recover mode
 4, mini usb connectkon between host and jetson
 5. follow all steps
-
-
-
+6. cuda installation into jetson is very slow.
+7 installation of componennts is slow because some python packages installed via pypi
 
 
 
