@@ -183,7 +183,10 @@ partially test ZED
 1. zed-tensorflow, tensorflow-gpu==1.15
 2. nearly complete the test of ZED
 
-
+20191012:
+1. initialize Jetson TX2
+2. must complete mirroring the ubuntu whole system
+3. plan to flash tx2 with ubuntu18
 
 
 
