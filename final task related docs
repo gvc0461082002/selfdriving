@@ -208,5 +208,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D OPENCV_EXTRA_MODULES_PATH=/media/lulu/a266a3fb-01cb-4f74-8037-4212b67d4114/opencvinstall/opencv_contrib/modules \
     -D BUILD_EXAMPLES=ON ..
 
+https://linuxize.com/post/how-to-install-opencv-on-ubuntu-18-04/
 
+3.
 
