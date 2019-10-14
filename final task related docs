@@ -198,8 +198,15 @@ Tx2 flash:
 7 installation of componennts is slow because some python packages installed via pypi
 
 20191014
-jetpack, sdk manager, hardware configuration, uncheck 'host machine'
-
+1. jetpack, sdk manager, hardware configuration, uncheck 'host machine'
+2. opencv installation, opencv_extra_module path should be set correctly
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_C_EXAMPLES=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_GENERATE_PKGCONFIG=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=/media/lulu/a266a3fb-01cb-4f74-8037-4212b67d4114/opencvinstall/opencv_contrib/modules \
+    -D BUILD_EXAMPLES=ON ..
 
 
 
