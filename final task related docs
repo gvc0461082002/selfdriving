@@ -210,5 +210,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 
 https://linuxize.com/post/how-to-install-opencv-on-ubuntu-18-04/
 
-3.
+20191015:
+1. ipc and jetson TX1 system clone
+2. yolov2, make file for different configuration
 
