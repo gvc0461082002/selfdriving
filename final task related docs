@@ -110,6 +110,8 @@ Radford: unsupervised represnetation learning deep gans
 NYU: deep multiscale video prediction bveyond mean square error
 
 left camera view+ disparity view + realscale bird view + mask disparity view
+gpslabel: https://www.gpsbabel.org/
+or basecamp
 
 create a map of   UCI campus  around 6km/h
 
