@@ -229,6 +229,8 @@ $ kpartx -d -v file.iso
 del devmap : loop0p1
 loop deleted : /dev/loop0
 
+20191015:
+1. OSM open street map
 
 
 
