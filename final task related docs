@@ -230,8 +230,9 @@ del devmap : loop0p1
 loop deleted : /dev/loop0
 
 20191015:
-1. OSM open street map
-
+1. OSM open street map, export a selected area to a file.osm, 
+2. std::make_shared
+3. NVIDIA Inference Server
 
 
 
