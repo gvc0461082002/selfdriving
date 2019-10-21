@@ -251,7 +251,9 @@ loop deleted : /dev/loop0
       add_executable(trajanalysis trajanalysis.cpp)
       add_executable(vending_controller vending_controller.cpp)
   6. termios
-  7
+  20191021:
+  razor_9dof_imu, calibration:
+  https://medium.com/@leofaf/sparkfun-9dof-razor-imu-m0-with-ros-d9e1c5209f9e
       
 
 
