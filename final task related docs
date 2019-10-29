@@ -266,7 +266,14 @@ loop deleted : /dev/loop0
   
   20191025:
   1. LUCY functions testing
+  2. Nohup is short for “No Hangups.” It’s not a command that you run by itself. Nohup is a supplemental command that tells the Linux system not to stop another command once it has started. That means it’ll keep running until it’s done, even if the user that started it logs out
   
-  
+https://www.maketecheasier.com/nohup-and-uses/
 
+20191029:
+
+https://medium.com/lyftlevel5/https-medium-com-lyftlevel5-rethinking-maps-for-self-driving-a147c24758d6
+
+
+Four noteworthy HD layers are: the geometric map, the semantic map, map priors, and real-time knowledge
 
