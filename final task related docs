@@ -277,3 +277,13 @@ https://medium.com/lyftlevel5/https-medium-com-lyftlevel5-rethinking-maps-for-se
 
 Four noteworthy HD layers are: the geometric map, the semantic map, map priors, and real-time knowledge
 
+Four noteworthy HD layers are: the geometric map, the semantic map, map priors, and real-time knowledge
+
+20191031:
+66
+
+A feature detector is an algorithm which takes an image and outputs locations (i.e. pixel coordinates) of significant areas in your image. An example of this is a corner detector, which outputs the locations of corners in your image but does not tell you any other information about the features detected.
+
+A feature descriptor is an algorithm which takes an image and outputs feature descriptors/feature vectors. Feature descriptors encode interesting information into a series of numbers and act as a sort of numerical "fingerprint" that can be used to differentiate one feature from another. Ideally this information would be invariant under image transformation, so we can find the feature again even if the image is transformed in some way. An example would be SIFT, which encodes information about the local neighbourhood image gradients the numbers of the feature vector. Other examples you can read about are HOG and SURF.
+
+EDIT: When it comes to feature detectors, the "location" might also include a number describing the size or scale of the feature. This is because things that look like corners when "zoomed in" may not look like corners when "zoomed out", and so specifying scale information is important. So instead of just using an (x,y) pair as a location in "image space", you might have a triple (x,y,scale) as location in "scale space".
