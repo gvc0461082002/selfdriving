@@ -296,3 +296,7 @@ EDIT: When it comes to feature detectors, the "location" might also include a nu
 4. ORB-SLAM
 5. ORB-SLAM2
 6. RTABMAP
+20191112:
+for carla:
+1. follow the steps to build carla unider linux
+2. export pytonapi 3.6 egg path for carla python3.6
