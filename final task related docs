@@ -300,3 +300,6 @@ EDIT: When it comes to feature detectors, the "location" might also include a nu
 for carla:
 1. follow the steps to build carla unider linux
 2. export pytonapi 3.6 egg path for carla python3.6
+20191130:
+1. carla-ros require python2.7
+
