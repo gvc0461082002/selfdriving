@@ -304,4 +304,8 @@ for carla:
 1. carla-ros require python2.7
 2. carla, carla-ros-bridge ,connected with rviz works fine
 3. 
+20191203:
+
+carla<------>carla-ros<-------->ros
+1. stereo camera
 
