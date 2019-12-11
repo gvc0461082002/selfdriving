@@ -308,4 +308,10 @@ for carla:
 
 carla<------>carla-ros<-------->ros
 1. stereo camera
+20191211:
+multiple waypoints
+ROS_PACKAGE_PATH setting,
+turblebot3, ubutnu18.04lts
+
+
 
