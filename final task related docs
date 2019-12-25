@@ -313,5 +313,9 @@ multiple waypoints
 ROS_PACKAGE_PATH setting,
 turblebot3, ubutnu18.04lts
 
-
+20191224:
+1. yaml-cpp, different versions
+2. testing gflags
+20191225:
+1. gflags
 
