@@ -1,0 +1,25 @@
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=ON 
+ -D WITH_OPENNI2=ON -D BUILD_opencv_python2=OFF 
+ -D BUILD_opencv_python3=ON 
+ -D PYTHON3_EXECUTABLE=/usr/bin/python3.6 
+ -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6 
+ -D PYTHON3_LIBRARY=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6.so 
+ -D OPENCV_EXTRA_MODULES_PATH=<opencv_contrib_unzip_destination>OPENCV_ENABLE_NONFREE=ON <opencv_unzip_destination>
+
+
+
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D WITH_CUDA=ON \
+      -D OPENCV_GENERATE_PKGCONFIG=ON \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
+    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+    -D OPENCV_ENABLE_NONFREE=ON \
+    -D BUILD_EXAMPLES=ON ..\
+    -D WITH_OPENNI2=ON \
+    -D BUILD_opencv_python2=OFF \
+    -D BUILD_opencv_python3=ON \
+    -D PYTHON3_EXECUTABLE=/usr/bin/python3.6 \
+    -D PYTHON3_INCLUDE_DIR=/usr/include/python3.6 \
+    -D PYTHON3_LIBRARY=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6.so 
+    
