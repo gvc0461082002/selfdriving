@@ -1,0 +1,5 @@
+sudo apt-get install libyaml-cpp-dev5v5
+
+it's better to install the ubutnu default version as per potential conflict of (yaml-cpp github) with ros
+
+for the requirements of libyaml-cpp.X version, we can build yaml-cpp source , simpley use generated static or so libs but not install them into system folder
