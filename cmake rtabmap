@@ -1,0 +1,3 @@
+cmake
+-DTorch_DIR=/media/lulu/a258d45d-b268-473b-8c8f-756b25014d4f/packages/rtabmap_full_install/libtorch-cxx11-abi-shared-with-deps-1.4.0/libtorch/share/cmake/Torch/ 
+-DPython3_EXECUTABLE=/usr/bin/python3.6 ..
