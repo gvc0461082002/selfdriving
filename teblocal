@@ -1,1 +1,10 @@
 ros nav msg path
+/**
+    * @brief Set the plan that the teb local planner is following
+    * @param orig_global_plan The plan to pass to the local planner
+    * @return True if the plan was updated successfully, false otherwise
+    */
+  bool setPlan(const std::vector<geometry_msgs::PoseStamped>& orig_global_plan);
+  
+  
+  
