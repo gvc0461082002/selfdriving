@@ -8,3 +8,9 @@ ros nav msg path
   
   
   
+ /**
+   * @brief Get the current robot footprint/contour model
+   * @param nh const reference to the local ros::NodeHandle
+   * @return Robot footprint model used for optimization
+   */
+  static RobotFootprintModelPtr getRobotFootprintFromParamServer(const ros::NodeHandle& nh);
