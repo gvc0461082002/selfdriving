@@ -14,3 +14,20 @@ ros nav msg path
    * @return Robot footprint model used for optimization
    */
   static RobotFootprintModelPtr getRobotFootprintFromParamServer(const ros::NodeHandle& nh);
+
+
+/**
+ * @class EdgeDynamicObstacle
+ * @brief Edge defining the cost function for keeping a distance from dynamic (moving) obstacles.
+ * 
+ * The edge depends on two vertices \f$ \mathbf{s}_i, \Delta T_i \f$ and minimizes: \n
+ * \f$ \min \textrm{penaltyBelow}( dist2obstacle) \cdot weight \f$. \n
+ * \e dist2obstacle denotes the minimum distance to the obstacle trajectory (spatial and temporal). \n
+ * \e weight can be set using setInformation(). \n
+ * \e penaltyBelow denotes the penalty function, see penaltyBoundFromBelow(). \n
+ * @see TebOptimalPlanner::AddEdgesDynamicObstacles
+ * @remarks Do not forget to call setTebConfig(), setVertexIdx() and 
+ * @warning Experimental
+ */  
+class EdgeDynamicObstacle : public BaseTebUnaryEdge<2, const Obstacle*, VertexPose>
+
