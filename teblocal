@@ -51,4 +51,8 @@ class EdgeDynamicObstacle : public BaseTebUnaryEdge<2, const Obstacle*, VertexPo
 class EdgeKinematicsDiffDrive : public BaseTebBinaryEdge<2, double, VertexPose, VertexPose>
 
 
+homotopy
+
+
+
 
