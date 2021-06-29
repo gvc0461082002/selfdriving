@@ -53,6 +53,6 @@ class EdgeKinematicsDiffDrive : public BaseTebBinaryEdge<2, double, VertexPose, 
 
 homotopy
 
-
+Search-based Path Planning with Homotopy Class Constraints
 
 
